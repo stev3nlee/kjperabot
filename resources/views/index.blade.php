@@ -2,6 +2,7 @@
 
 @section('content')
 
+<!--
 	<div class="home-search-mobile visible-xs">
 		<div class="search-center">
 			<form action="{{ url('/search') }}" method="get">
@@ -12,48 +13,9 @@
 			</form>
 		</div>
 	</div>
+-->
 
-	@if(count($saleProduts)>0)
-		<div class="home-best-seller">
-			<div class="container">
-				<div class="title"> Produk Diskon </div>
-				<div class="row">
-	        @foreach($saleProduts as $product)
-					<div class="col-md-3 col-sm-3 col-xs-6">
-						<div class="product-box">
-							<a href="{{ url('/product-detail/'.$product->slug) }}">
-								<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
-								<div class="product-name text-center"> {{ $product->product_name }} </div>
-								<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
-							</a>
-						</div>
-					</div>
-	        @endforeach
-				</div>
-			</div>
-		</div>
-	@else
 	<div class="home-best-seller">
-		<div class="container">
-			<div class="title"> Produk Terlaku </div>
-			<div class="row">
-        @foreach($hotProduts as $product)
-				<div class="col-md-3 col-sm-3 col-xs-6">
-					<div class="product-box">
-						<a href="{{ url('/product-detail/'.$product->slug) }}">
-							<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
-							<div class="product-name text-center"> {{ $product->product_name }} </div>
-							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
-						</a>
-					</div>
-				</div>
-        @endforeach
-			</div>
-		</div>
-	</div>
-	@endif
-
-	<div class="home-new-product">
 		<div class="container">
 			<div class="title"> Produk Terbaru </div>
 			<div class="row">
@@ -88,10 +50,52 @@
 				</div>
 			</div>
 			<div class="more-product">
-				<a href="{{ url('/product') }}"> More &rarr; </a>
+				<a href="{{ url('/product?urut=terbaru&order=40') }}"> More &rarr; </a>
 			</div>
 		</div>
 	</div>
+
+	@if(count($saleProduts)>0)
+		<div class="home-best-seller">
+			<div class="container">
+				<div class="title"> Produk Diskon </div>
+				<div class="row">
+	        @foreach($saleProduts as $product)
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="product-box">
+							<a href="{{ url('/product-detail/'.$product->slug) }}">
+								<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
+								<div class="product-name text-center"> {{ $product->product_name }} </div>
+								<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
+							</a>
+						</div>
+					</div>
+	        @endforeach
+				</div>
+			</div>
+		</div>
+	@else
+	<div class="home-new-product">
+		<div class="container">
+			<div class="title"> Produk Terlaku </div>
+			<div class="row">
+        @foreach($hotProduts as $product)
+				<div class="col-md-3 col-sm-3 col-xs-6">
+					<div class="product-box">
+						<a href="{{ url('/product-detail/'.$product->slug) }}">
+							<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
+							<div class="product-name text-center"> {{ $product->product_name }} </div>
+							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
+						</a>
+					</div>
+				</div>
+        @endforeach
+			</div>
+		</div>
+	</div>
+	@endif
+
+	
 	@if(count($testimonies) > 0)
 	<div class="home-article">
 		<div class="container">

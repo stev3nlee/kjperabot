@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/fancybox/jquery.fancybox.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/simple-pagination/simplePagination.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/fonts.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.2') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.1') }}">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
 

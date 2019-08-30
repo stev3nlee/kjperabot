@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/fancybox/jquery.fancybox.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/simple-pagination/simplePagination.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/fonts.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.2.2') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.1') }}">
 
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/accordion/jquery-ui.js') }}"></script>
@@ -36,25 +36,61 @@
 <section id="main-page">
 	<div class="pos-rel">
 		<div class="bg-dark"></div>
+
+		<!-- SEARCH -->
+		<div class="home-search-mobile">
+			<div class="search-center">
+				<form action="{{ url('/search') }}" method="get">
+					<div class="home-search-box form-control">
+						<input type="text" name="q" placeholder="Cari nama produk.."/>
+						<button type="submit" class="btn">CARI</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
 		<header id="header">
 			<div class="container">
 				<div class="row">
-					<div class="visible-xs col-xs-4">
+					<div class="visible-xs col-xs-6">
 						<div class="h70">
 							<div class="tbl">
-								<div class="cell" style="position: relative;left: -21px;">
-									<a class="toggle-menu">
-										<img src="{{ asset('icons/menu-toggle.svg') }}" class=""/>
-									</a>
+								<div class="cell">
+									<div>
+										<div class="inline-block">
+											<a class="toggle-menu">
+												<img src="{{ asset('icons/menu-toggle.svg') }}" class=""/>
+											</a>
+										</div>
+										<div class="inline-block">
+											<div class="img-logo-mobile"><a href="{{ url('/') }}"><img src="{{ asset($company->logo_path) }}" class="img-responsive"/></a></div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>					
-					<div class="visible-xs col-xs-8">
+					<div class="visible-xs col-xs-6 text-right">
 						<div class="h70">
 							<div class="tbl">
 								<div class="cell">
-									<div class="text-right"><a href="{{ url('/cart') }}">CART ({{ $cart_count }})</a></div>
+									<div>
+										<div class="inline-block">
+											<div class="click-search">
+												<img src="{{ asset('icons/search2.svg') }}" class=""/>
+											</div>
+										</div>
+										<div class="inline-block" style="margin: 0 5px;">
+											@if(!Auth::check())
+												<a href="{{ url('/sign') }}"><img src="{{ asset('icons/account.svg') }}" class=""/></a>
+											@else
+												<a href="{{ url('/profile') }}"><img src="{{ asset('icons/account.svg') }}" class=""/></a>
+											@endif
+										</div>
+										<div class="inline-block">
+											<a href="{{ url('/cart') }}"><img src="{{ asset('icons/cart.svg') }}" class=""/> ({{ $cart_count }})</a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

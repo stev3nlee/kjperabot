@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/fancybox/jquery.fancybox.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/simple-pagination/simplePagination.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/fonts.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.2') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.1') }}">
 
 	<script>var site_url = '';</script>
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
