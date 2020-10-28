@@ -81,7 +81,7 @@
 										</div>
 									</div>
 									<div class="display-inline">
-										<input type="text" class="form-control" maxlength="9" id="total_price" name="totalPrice" disabled value="{{$product->product_price-($product->product_price*$product->sale/100)}}" style="width:150px;" />
+										<input type="text" class="form-control" maxlength="9" id="total_price" name="totalPrice" disabled  value="{{$product->product_price-($product->product_price*$product->sale/100)}}" style="width:150px;" />
 									</div>
 								</div>
 							</div>
@@ -160,9 +160,9 @@
 							<tr id="{{$product_detail->product_detail_id}}">
 								<td>
 									<input type="hidden" name="product_detail_id[]" value="{{$product_detail->id}}"/>
-									<input type="text" class="form-control input-color-{{str_slug($product_detail->color,'-')}}" name="color[]" style="width: 100px;" value="{{$product_detail->color}}"/>
+									<input type="text" required="required" class="form-control input-color-{{str_slug($product_detail->color,'-')}}" name="color[]" style="width: 100px;" value="{{$product_detail->color}}"/>
 								</td>
-								<td><input type="text" class="form-control current_stock" name="stock[]" value="{{$product_detail->stock}}" style="width: 50px;"></td>
+								<td><input type="text" class="form-control current_stock" required="required" name="stock[]" value="{{$product_detail->stock}}" style="width: 50px;"></td>
 								<td>
 										<a class="fancybox btn-delete-color" data-id="{{ $product_detail->id }}" href="#delete">
 											<input type="button" class="btn btn-small add-colour" style="width:80px" data-id="{{ $product_detail->id }}" value="Delete"/>

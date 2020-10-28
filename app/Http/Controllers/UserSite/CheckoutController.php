@@ -146,7 +146,7 @@ class CheckoutController extends Controller
         "provinsi.required"  => "Kolom provinsi pengiriman wajib diisi.",
         "kota_shipping.required"      => "Kolom kota pengiriman wajib diisi.",
         "alamat.required"    => "Kolom alamat pengiriman wajib diisi.",
-        "kode_pos.required"  => "Kolom kode pos pengiriman wajib diisi.",
+        //"kode_pos.required"  => "Kolom kode pos pengiriman wajib diisi.",
 
         "nama_depan_billing.required_if"  => "Kolom nama depan billing wajib diisi apabila kolom sama alamat tidak dicentang.",
         "nama_depan_billing.max"          => "Kolom nama depan billing maksimal 50 karakter.",
@@ -160,7 +160,7 @@ class CheckoutController extends Controller
         "provinsi_billing.requiredif"   => "Kolom provinsi billing wajib diisi apabila kolom sama alamat tidak dicentang.",
         "kota_billing.required_if"      => "Kolom kota wajib billing diisi apabila kolom sama alamat tidak dicentang.",
         "alamat_billing.required_if"       => "Kolom alamat billing wajib diisi apabila kolom sama alamat tidak dicentang.",
-        "kode_pos_billing.required_if"     => "Kolom kode pos billing wajib diisi apabila kolom sama alamat tidak dicentang.",
+        //"kode_pos_billing.required_if"     => "Kolom kode pos billing wajib diisi apabila kolom sama alamat tidak dicentang.",
 
 
         "shipping.required"     => "Kolom pilihan metode pengiriman wajib diisi.",
@@ -173,7 +173,7 @@ class CheckoutController extends Controller
         "nomor_telepon" => "required|max:50",
         "provinsi"      => "required",
         "kota_shipping"  => "required",
-        "kode_pos"     => "required",
+        //"kode_pos"     => "required",
         "alamat"       => "required",
 
         "nama_depan_billing"    => "required_if:same_address,1|max:50",
@@ -182,7 +182,7 @@ class CheckoutController extends Controller
         "nomor_telepon_billing" => "required_if:same_address,1|max:50",
         "provinsi_billing"      => "required_if:same_address,1",
         "kota_billing"          => "required_if:same_address,1",
-        "kode_pos_billing"      =>"required_if:same_address,1",
+        //"kode_pos_billing"      =>"required_if:same_address,1",
         "alamat_billing"     =>"required_if:same_address,1",
 
         "shipping"           =>"required",

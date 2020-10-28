@@ -17,6 +17,7 @@ use App\Models\Subscriber;
 use App\User;
 use Newsletter;
 use Auth;
+use Mail;
 class MemberController extends Controller
 {
     public function __construct()
@@ -281,5 +282,25 @@ class MemberController extends Controller
         Parent::h_flash('Nomor Order Anda Salah.','warning');
       }
       return redirect()->back();
+    }
+    
+    public function testmail()
+    { 
+      Mail::raw('Test Email', function ($message) {
+        $message->to('anthony@idsskincare.com')
+          ->subject('test email');
+      });
+      dd(Mail::failures());
+        //     Mail::send('test',null , function($message)
+        // {
+        //     $message->from(
+        //         'noreply@kjperabot.co.id',
+        //         'KJP'
+        //     );
+        //     $message->to('steven@idsskincare.com');
+        //     $message->subject('test email');
+        // });    
+        
+      
     }
 }

@@ -118,7 +118,7 @@ class Order extends Model
 
     public function scopeGetReminderOrder($query)
   	{
-      $query->where('order_status',1)->where('is_deleted',0)->where('is_remindered',0)->whereRaw('TIMESTAMPDIFF(hour,created_at,NOW()) = 46');
+      $query->where('order_status',1)->where('is_deleted',0)->where('is_remindered',0)->whereRaw('TIMESTAMPDIFF(hour,created_at,NOW()) = 42');
       return $query;
   	}
 

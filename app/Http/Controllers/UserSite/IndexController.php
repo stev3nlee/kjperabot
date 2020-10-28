@@ -20,6 +20,7 @@ use App\Models\Testimony;
 use Newsletter;
 use App\Jobs\SendContactUsEmail;
 use App\Jobs\SendAdministratorContactUsEmail;
+use DB;
 class IndexController extends Controller
 {
 
@@ -43,7 +44,11 @@ class IndexController extends Controller
         "sliders"=>$this->slider->get()
         ,"hotProduts"=>$this->product->getByHotProduct()->get()
         ,"saleProduts"=>$this->product->getBySaleProduct()->get()
-        ,"newProducts"=>$this->product->orderby("created_at","desc")->limit(4)->get()
+        ,"newProducts"=>$this->product->withCount([
+                          'product_details AS total_stock' => function ($query) {
+                                      $query->select(DB::raw("SUM(stock) as total_stock"));
+                                  }
+                              ])->having('total_stock', '>', 0)->orderby("created_at","desc")->limit(4)->get()
         ,"newArticles"=>$this->article->orderby("created_at","desc")->limit(4)->get()
         ,"testimonies"=>$this->testimony->orderby("created_at","desc")->limit(4)->get()
       ]);

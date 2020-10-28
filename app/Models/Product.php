@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Product extends Model
 {
@@ -34,7 +35,13 @@ class Product extends Model
       $query->select("products.slug","products.product_name","products.product_price","products.image_path","products.sale", \DB::raw('SUM(quantity) as total_sales'));
       $query->leftjoin("product_details","product_details.product_id","products.id");
       $query->leftjoin("order_details","order_details.product_detail_id","product_details.id");
-      $query->groupby("products.slug","products.product_name","products.product_price","products.image_path","products.sale");
+      $query->groupby("products.id","products.slug","products.product_name","products.product_price","products.image_path","products.sale");
+      $query->withCount([
+                          'product_details AS total_stock' => function ($query) {
+                                      $query->select(DB::raw("SUM(stock) as total_stock"));
+                                  }
+                              ]);
+      $query->having('total_stock', '>', 0);
       $query->orderby("total_sales","desc");
       $query->limit(4);
       return $query;
@@ -59,12 +66,18 @@ class Product extends Model
     public function scopeGetOrder($query,$order)
     {
       $query->select('*',\DB::raw('product_price - ( product_price * sale / 100 ) AS total_price'));
+      
+      $query->withCount([
+                          'product_details AS totalstock' => function ($query) {
+                                      $query->select(DB::raw("SUM(stock) as totalstock"));
+                                  }
+                              ])->orderby("totalstock",'desc');
       if($order == 'terbaru'){
         $query->orderby("products.id",'desc');
       }else{
         $query->orderby("total_price",$order);
       }
-      
+
       return $query;
     }
 

@@ -81,7 +81,7 @@
 											</div>
 										</div>
 										<div class="display-inline">
-											<input type="text" class="form-control" id="total_price" maxlength="9" name="total_price" disabled value="{{ old('total_price') }}" style="width:150px;" />
+											<input type="text" class="form-control" id="total_price" maxlength="9" name="total_price" value="{{ old('total_price') }}" style="width:150px;" />
 										</div>
 									</div>
 								</div>
@@ -191,7 +191,7 @@ $(function() {
 			sizeandstock+='	<div class="form-inline"><label>Product Color : '+$('#div_color'+i).val()+'</label><input type="hidden" name="color[]" value="'+$('#div_color'+i).val()+'"/></div>'
 			sizeandstock+='	<div class="SizeAndStock">';
 			sizeandstock+='		<div class="form-inline mr20">';
-			sizeandstock+='			<div class="mr10 pos-det">Stock <span class="red">*</span> : <input type="text" required="" id="txtboxToFilter" class="form-control" maxlength="4" name="stock[]" value="" style="width: 50px;"></div>';
+			sizeandstock+='			<div class="mr10 pos-det">Stock <span class="red">*</span> : <input type="text" required="required" id="txtboxToFilter" class="form-control" maxlength="4" name="stock[]" value="" style="width: 50px;"></div>';
 			sizeandstock+='		</div>';
 			sizeandstock+='	</div>';
 			sizeandstock+='</div>';

@@ -225,7 +225,6 @@ class ProductController extends Controller
       $product = Product::findOrFail($request->input('id'));
       $product_detail = Product_detail::where('product_id',$product->id)->pluck('id');
       $order = Order_detail::leftjoin('orders','order_details.order_id','=','orders.id')->whereIn('order_details.product_detail_id',$product_detail)->where('order_status','<',4)->whereNull('jne_track')->first();
-      //dd($order);
       if(empty($order)){
         \DB::beginTransaction();
         try {

@@ -18,6 +18,7 @@
 								<td>Email Address</td>
 								<td>Topic</td>
 								<td>Message</td>
+								<td>Created Date</td>
 								<td width="70" class="text-center">Action</td>
 							</tr>
 						</thead>
@@ -29,6 +30,7 @@
 								<td>{{ $inbox->email }}</td>
 								<td>{{ $inbox->topic }}</td>
 								<td>{{ $inbox->message }}</td>
+								<td>{{ $inbox->created_at }}</td>
 								<td class="text-center">
 									<a class="fancybox delInbox" href="#deleteGallery" data-id="{{$inbox->id}}">
 										<div class="img-delete"></div>
