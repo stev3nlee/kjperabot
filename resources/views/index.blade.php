@@ -1,4 +1,4 @@
-@extends('layout2')
+@extends('layout')
 
 @section('content')
 
@@ -14,6 +14,38 @@
 		</div>
 	</div>
 -->
+
+	<div id="home-banner">
+		<!--
+		<div class="center-slider hidden-xs">
+			<div class="h700">
+				<div class="tbl">
+					<div class="cell">
+						<div class="home-search">
+							<div class="search-center">
+								<form action="{{ url('/search') }}" method="get">
+									<div class="search-box form-control">
+										<input type="text" name="q" placeholder="Cari nama produk.."/>
+										<button type="submit" class="btn">CARI</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
+		<div id="slider-banner" class="owl-carousel">
+				@foreach($sliders as $slider)
+				<div class="item">
+					<div class="img-banner" style="background:url('{{ asset($slider->image_path) }}') no-repeat center 0;"></div>
+					<div class="overlay"></div>
+				</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
 
 	<div class="home-best-seller">
 		<div class="container">

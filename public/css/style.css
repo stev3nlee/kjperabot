@@ -213,8 +213,8 @@ textarea.form-control { height: 120px; resize: none; line-height: 1.8; border: 1
 
 /* Header */
 #header { background: transparent; width: 100%; position: absolute; top: 30px; left: 0; z-index: 9999; padding: 0 20px; }
-#header2 { width: 100%; padding: 30px 20px; background-color:#f7f7f7; }
-#header3 { width: 100%; padding: 30px 20px; background-color:#f7f7f7; border-bottom: 1px solid #eee;}
+#header2 { width: 100%; padding: 15px; background-color:#fff; }
+#header3 { width: 100%; padding: 30px 20px; background-color:#fff; border-bottom: 1px solid #eee;}
 #header ul li a, #header2 ul li a { margin-right:30px; line-height:20px; font-size: 14px; padding-bottom:7px; border-bottom: 1px solid #ca5a5a;}
 #header ul .blueunderscore a, #header2 ul .blueunderscore a { border-bottom: 1px solid #30318b; margin-right:0 !important; margin-left: 20px; }
 #header ul .blueunderscore input[type="text"], #header2 ul .blueunderscore input[type="text"] { border-bottom: 1px solid #30318b; margin-right:0 !important;}
@@ -234,9 +234,8 @@ textarea.form-control { height: 120px; resize: none; line-height: 1.8; border: 1
 
 /* Index */
 #home-banner { width: 100%; position: relative; }
-.img-banner { background-size: cover !important; height:100vh; width: 100%; }
 .overlay { background: rgba(137, 137, 137, 0.5); position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%; opacity: 0; transition: .5s ease; }
-#slider-banner .overlay { opacity: 0.7; }
+.img-banner img { width: 100%; height: 100% }
 
 .center-slider { padding: 0 350px; position: absolute; width: 100%; top: 0; left: 0; z-index: 99; }
 .search-center { width:100%; }
