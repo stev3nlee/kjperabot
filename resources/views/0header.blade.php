@@ -34,9 +34,9 @@
 	<script type="text/javascript" src="{{ asset('js/scrollIt.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/web.js') }}"></script>
 
-	<!-- Start of  Zendesk Widget script 
+	<!-- Start of  Zendesk Widget script  -->
 	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=15bb09b5-8cd0-499b-9400-bc7f31878b33"> </script>
-	End of  Zendesk Widget script -->
+	<!-- End of  Zendesk Widget script -->
 
 </head>
 <body>
