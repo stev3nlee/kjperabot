@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/fancybox/jquery.fancybox.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/simple-pagination/simplePagination.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/fonts.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.1') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.5') }}">
 
 	<!-- JS-->
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
@@ -33,6 +33,11 @@
 	<script type="text/javascript" src="{{ asset('js/owl/owl.carousel.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/scrollIt.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/web.js') }}"></script>
+
+	<!-- Start of  Zendesk Widget script 
+	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=15bb09b5-8cd0-499b-9400-bc7f31878b33"> </script>
+	End of  Zendesk Widget script -->
+
 </head>
 <body>
 
