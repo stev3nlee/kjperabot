@@ -34,12 +34,12 @@
 	<script type="text/javascript" src="{{ asset('js/scrollIt.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/web.js') }}"></script>
 
-	<!-- Start of  Zendesk Widget script  -->
+	<!-- Start of  Zendesk Widget script
 	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=15bb09b5-8cd0-499b-9400-bc7f31878b33"> </script>
-	<!-- End of  Zendesk Widget script -->
+	End of  Zendesk Widget script -->
 
 	<style>
-		.fix-wa { position: fixed; left: 20px; bottom: 15px; z-index: 100; border-radius:30px;  }
+		.fix-wa { position: fixed; right: 20px; bottom: 15px; z-index: 100; border-radius:30px;  }
 		.fix-wa img { border-radius:30px; width:105px;}
 	</style>
 
