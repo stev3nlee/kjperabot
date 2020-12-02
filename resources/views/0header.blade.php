@@ -38,6 +38,11 @@
 	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=15bb09b5-8cd0-499b-9400-bc7f31878b33"> </script>
 	<!-- End of  Zendesk Widget script -->
 
+	<style>
+		.fix-wa { position: fixed; left: 20px; bottom: 15px; z-index: 100; border-radius:30px;  }
+		.fix-wa img { border-radius:30px; width:105px;}
+	</style>
+
 </head>
 <body>
 

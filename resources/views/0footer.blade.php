@@ -1,3 +1,9 @@
+<div class="fix-wa">
+	<a href="https://api.whatsapp.com/send?phone=6282246477047" target="_blank">
+		<img src="{{ url('images/icons/whatsapp.png?v.1')}}">
+	</a>
+</div>
+
 		<footer id="footer">
 			<div class="container">
 				<div class="row">
