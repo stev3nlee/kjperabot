@@ -82,6 +82,7 @@
 								<div class="cart-color">Warna {{ $cart->color }}</div>
 								<div class="cart-input"><input type="number" min="0" value="{{ $cart->qty }}" name="qty[]" class="form-control form-cart qty qty{{$cart->cart_id}}" data-id="{{$cart->cart_id}}"></div>
 								<div class="cart-price">Rp. <span class="product_price">{{number_format($cart->sale == 0 ? $cart->product_price : $cart->product_price - ($cart->product_price * $cart->sale / 100))}}</span></div>
+								<span> <a href="{{ url('/product-detail/'.$cart->slug.'/'.$cart->cart_id) }}" class="btn btn-edit-cart"> EDIT </a> </span>
 							</div>
 							@if($cart->total_stock == 0)
 	              <div class="w20 text-right">
