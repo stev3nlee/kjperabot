@@ -38,6 +38,9 @@ class Order extends Model
       ,"is_remindered"
       ,"is_remindered_23"
       ,'is_deleted'
+      ,'payment_method'
+      ,'total_price'
+      ,'va_number'
     ];
 
     public function scopeByUser($query,$user_id)

@@ -44,7 +44,7 @@
 						<div class="row mt30 checkout-pay">
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<div class="checkout-header">Metode Pembayaran</div>
-								<div class="checkout-desc">Transfer Bank</div>
+								<div class="checkout-desc">Midtrans</div>
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<div class="checkout-header">Metode Pengiriman</div>

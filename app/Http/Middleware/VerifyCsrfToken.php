@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        'https://charlie.kjperabot.co.id/midtrans-notif',
+        'https://kjperabot.co.id/midtrans-notif'
     ];
 }

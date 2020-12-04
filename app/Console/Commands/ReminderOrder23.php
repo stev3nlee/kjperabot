@@ -41,12 +41,12 @@ class ReminderOrder23 extends Command
      */
     public function handle()
     {
-        $orders = Order::getReminderOrder23()->pluck('billing_email','order_no');
-        if(count($orders) > 0){
-          foreach($orders as $order_no => $email){
-            Mail::to($email)->send(new Reminder_order_mail23($order_no));
-          }
-          //SendReminderOrder23::dispatch($orders);
-        }
+        // $orders = Order::getReminderOrder23()->pluck('billing_email','order_no');
+        // if(count($orders) > 0){
+        //   foreach($orders as $order_no => $email){
+        //     Mail::to($email)->send(new Reminder_order_mail23($order_no));
+        //   }
+        //   //SendReminderOrder23::dispatch($orders);
+        // }
     }
 }

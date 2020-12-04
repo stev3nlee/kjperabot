@@ -64,7 +64,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 								<td>
 									@if($order->order_status == 3)
 										@if($order->jne_track == null)
-											<div class="orange">On Process</div>
+											<div class="orange">Packing</div>
 											<a class="fancybox trackingClick" href="#pop-tracking" onclick="set_tracking({{$order->id}})"><button type="button" class="btn btn-order">Tracking no</button></a>
 										@else
 											<div class="">{{ $order->jne_track }}</div>

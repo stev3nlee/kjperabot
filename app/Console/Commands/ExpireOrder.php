@@ -41,12 +41,12 @@ class ExpireOrder extends Command
      */
     public function handle()
     {
-      $orders = Order::getExpireOrder()->pluck('billing_email','order_no');
-      //dd($orders);
-      if(count($orders)>0){
-        foreach($orders as $order_no => $email){
-            Mail::to($email)->send(new Expire_order_mail($order_no));
-        }
-      }
+      // $orders = Order::getExpireOrder()->pluck('billing_email','order_no');
+      // //dd($orders);
+      // if(count($orders)>0){
+      //   foreach($orders as $order_no => $email){
+      //       Mail::to($email)->send(new Expire_order_mail($order_no));
+      //   }
+      // }
     }
 }

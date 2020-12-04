@@ -10,6 +10,15 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
+Route::get('/clear-config', function() {
+    $exitCode = Artisan::call('config:clear');
+    // return what you want
+});
+Route::post('/midtrans-notif', 'UserSite\CheckoutController@midtransNotif');
 Route::group(['middleware' => ['web']], function () {
 
   Route::get('/logout',"Auth\LoginController@logout");
@@ -61,7 +70,10 @@ Route::group(['middleware' => ['web']], function () {
       Route::post('/checkout/review','UserSite\CheckoutController@checkoutReview');
       Route::post('/checkout/create','UserSite\CheckoutController@checkoutCreate');
     });
+    Route::get('/checkout-success', 'UserSite\CheckoutController@midtransFinish');
+    Route::get('/checkout-failed', 'UserSite\CheckoutController@midtransFailed');
     Route::get('/checkout/success/{order_id}','UserSite\CheckoutController@checkoutSuccess');
+    Route::get('/checkout/failed/{order_id}','UserSite\CheckoutController@checkoutFailed');
   });
 
   Route::get('/',"UserSite\IndexController@showIndex");
@@ -225,7 +237,7 @@ Route::get('/mail/admincontactus', function () {
   $data=["full_name"=>"dummy","email"=>"dummy_email","topic"=>"1","message"=>"the message"];
   return new App\Mail\Administrator\Contact_us($data);
 });
-
+Route::get('/testmail','UserSite\MemberController@testmail');
 /**/
 
 //Clear Cache facade value:

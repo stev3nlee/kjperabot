@@ -71,9 +71,9 @@
 															</tbody>
 														  </table>
 													  </div>
-													  <div style="border-top: 1px solid #959595; padding: 20px 0; font-weight:normal;" >
+													  <!-- <div style="border-top: 1px solid #959595; padding: 20px 0; font-weight:normal;" >
 														Mohon melakukan konfirmasi pembayaran <a href="{{ url('confirm-payment/'.$order->order_no) }}" style="text-decoration:underline;">disini</a>.
-													  </div>
+													  </div> -->
 													  <div>
 														<table border="0" cellpadding="10" cellspacing="0" width="100%" style="border-top: 1px solid #959595; padding: 20px 0 0; font : 300 14px/18px 'Lucida Grande', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">
 														   <tbody>
@@ -92,7 +92,21 @@
 																</tr>
 																<tr>
 																	<td valign="top" width="190" style="padding: 5px 0;">METODE PEMBAYARAN</td>
-																	<td valign="top" style="padding: 5px 0; font-weight: normal; font-size: 12px;">Bank Transfer</td>
+																	<?php
+																		if($order->payment_method == 'bank_transfer'){
+																			$payment_method = 'BCA Virtual Account';
+																		}else if($order->payment_method == 'qris'){
+																			$payment_method = 'Qris';
+																			// if($order->acquirer == 'airpay shopee'){
+																			// 	$payment_method = 'ShopeePay';
+																			// }else{
+																			// 	$payment_method = 'Gopay';	
+																			// }
+																		}else{
+																			$payment_method = 'Bank Transfer';	
+																		}
+																	 ?>
+																	<td valign="top" style="padding: 5px 0; font-weight: normal; font-size: 12px;">{{ $payment_method }}</td>
 																</tr>
 																<tr>
 																	<td valign="top" width="190" style="padding: 5px 0;">ALAMAT BILLING</td>

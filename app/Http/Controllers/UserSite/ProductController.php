@@ -91,7 +91,7 @@ class ProductController extends Controller
   public function showProductDetail(Request $request, $slug,$cart_id = null)
   {
     $product= $this->product->where('slug',$slug)->first();
-    if( count($product) >0 ){
+    //if( count($product) >0 ){
       $details = $this->product_detail->where('product_id',$product->id)->get();
       $total_stock = array_sum(array_pluck($details,"stock"));
       $releated_products = $this->product->where("subcategory_id",$product->subcategory_id)->inRandomOrder()->limit(6)->get();
@@ -106,9 +106,9 @@ class ProductController extends Controller
         ,"total_stock"=>$total_stock
         ,"releated_products"=>$releated_products
       ]);
-    }else{
+    //}else{
       return redirect('product');
-    }
+    //}
   }
 
   public function addToWishlist(Request $request)

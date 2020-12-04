@@ -13,9 +13,11 @@ use App\Models\District;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Order_detail;
+use App\Models\Order_payment_detail;
 use App\Models\Order_history;
 use App\Models\Page;
 use App\Models\Product_detail;
+use App\Helper\Midtrans;
 use App\User;
 use Auth;
 use Session;
@@ -38,6 +40,7 @@ class CheckoutController extends Controller
       $this->page = new Page;
       $this->product_detail = new Product_detail;
       $this->user = new User;
+      $this->midtrans = new Midtrans();
     }
 
     public function preCheckout()
@@ -330,15 +333,16 @@ class CheckoutController extends Controller
         $dataOrder = $this->setOrderVariable(json_decode($request->input('data_order')));
 
         $carts = $this->cart->getProduct()->byUserId(Auth::user()->id)->get();
-
-        if($this->createOrder(Auth::user()->id,$order_no,$dataOrder,$carts) == true){
-
+        $order = $this->createOrder(Auth::user()->id,$order_no,$dataOrder,$carts);
+        if($order != false){
           /*If not on local host, send mail*/
           if($_SERVER['REMOTE_ADDR'] != "::1"){
-            SendUserOrder::dispatch($order_no);
-            SendAdministratorNotifOrder::dispatch($order_no);
+            //SendUserOrder::dispatch($order_no);
+            //SendAdministratorNotifOrder::dispatch($order_no);
           }
-          return redirect('checkout/success/'.$order_no);
+          $midtrans = $this->midtrans->redirect($order);
+          //header('Location: ' . $midtrans);
+          return redirect($midtrans);
         }else{
           return redirect('/');
         }
@@ -367,6 +371,14 @@ class CheckoutController extends Controller
         return new \App\Mail\User\Reminder_order_mail($order_no);
     }
 
+    public function midtransFinish(Request $request){
+        return redirect('checkout/success/'.$request->input('order_id'));
+    }
+
+    public function midtransFailed(Request $request){
+        return redirect('checkout/failed/'.$request->input('order_id'));
+    }
+
     public function checkoutSuccess($order_no)
     {
       $order = $this->order->where('order_no',$order_no)->with(['billing_province','billing_city','billing_district','shipping_province','shipping_city','shipping_district'])->first();
@@ -380,12 +392,23 @@ class CheckoutController extends Controller
       }
     }
 
-
+    public function checkoutFailed($order_no)
+    {
+      $order = $this->order->where('order_no',$order_no)->with(['billing_province','billing_city','billing_district','shipping_province','shipping_city','shipping_district'])->first();
+      if($order->user_id == Auth::user()->id){
+        return view('checkout/failed')->with([
+          "order" => $order
+          ,"details" => $this->order_detail->getProductByOrderId($order->id)->get()
+        ]);
+      }else{
+        return redirect('/');
+      }
+    }
 
     private function generateOrderNumber()
     {
       $order = $this->order->whereRaw('LEFT(order_no,4) = "'.date("Y").'"')->whereRaw('MID(order_no,5,2) = "'.date("m").'"')->max('order_no');
-      if(count($order) == 0){
+      if($order == 0){
         return date("Ym")."001";
       }else{
         return $order+1;
@@ -437,7 +460,7 @@ class CheckoutController extends Controller
     }
 
 
-    private function createOrder($user_id,$order_no,$data,$carts)
+    private function createOrderOld($user_id,$order_no,$data,$carts)
     {
 
       \DB::beginTransaction();
@@ -492,6 +515,215 @@ class CheckoutController extends Controller
         $this->cart->where('user_id',$user_id)->delete();
         \DB::commit();
         return true;
+      } catch (\Exception $e) {
+
+        \DB::rollback();
+        return false;
+      }
+    }
+
+    public function midtransNotif(Request $request){
+        try {
+            \Midtrans\Config::$serverKey = config('constants.MIDTRANS_SERVER_KEY');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = false;
+            $notif = new \Midtrans\Notification();
+
+            $transaction = $notif->transaction_status;
+            $type = $notif->payment_type;
+            $order_id = $notif->order_id;
+            $fraud = $notif->fraud_status;
+            $message = '';
+
+            $order = Order::where('order_no',$order_id)->first();
+            $check_status = Order_payment_detail::where('status',$transaction)->where('order_id',$order->id)->first(); 
+            $payment_detail = new Order_payment_detail;
+            $payment_detail->order_id = $order->id; 
+
+
+            if($order && !$check_status){
+                if ($transaction == 'capture') {
+                // For credit card transaction, we need to check whether transaction is challenge by FDS or not
+                    if ($type == 'credit_card') {
+                        if ($fraud == 'challenge') {
+                            // TODO set payment status in merchant's database to 'Challenge by FDS'
+                            // TODO merchant should decide whether this transaction is authorized or not in MAP
+                            $message = "Transaction order_id: " . $order_id ." is challenged by FDS";
+                            $order_status = 1;
+                        } else {
+                            // TODO set payment status in merchant's database to 'Success'
+                            $message =  "Transaction order_id: " . $order_id ." successfully captured using " . $type;
+                            $order_status = 3;
+                        }
+                    }
+                } else if ($transaction == 'settlement') {
+                    // TODO set payment status in merchant's database to 'Settlement'
+                    $message =  "Transaction order_id: " . $order_id ." successfully transfered using " . $type;
+                    $order_status = 3;
+                } else if ($transaction == 'pending') {
+                    // TODO set payment status in merchant's database to 'Pending'
+                    $message =  "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+                    $order_status = 1;
+                } else if ($transaction == 'deny') {
+                    // TODO set payment status in merchant's database to 'Denied'
+                    $message =  "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
+                    $order_status = 4;
+                } else if ($transaction == 'expire') {
+                    // TODO set payment status in merchant's database to 'expire'
+                    $message =  "Payment using " . $type . " for transaction order_id: " . $order_id . " is expired.";
+                    $order_status = 4;
+                } else if ($transaction == 'cancel') {
+                    // TODO set payment status in merchant's database to 'Denied'
+                    $message =  "Payment using " . $type . " for transaction order_id: " . $order_id . " is canceled.";
+                    $order_status = 4;
+                }
+
+
+                if($transaction == 'settlement'){
+                    $transaction = 'success';
+                }
+
+                $payment_detail->status = $transaction;
+                $payment_detail->signature = $notif->signature_key;
+                $payment_detail->tansaction_id = $notif->transaction_id;
+                $payment_detail->payload = json_encode($request->all());
+                $payment_detail->message = $message;
+                $payment_detail->save();
+
+                $order->payment_method = $type;
+                $order->order_status = $order_status;
+
+                if($type == 'bank_transfer'){
+                  $order->va_number = $notif->va_numbers[0]->va_number;
+                }
+                else if($type == 'qris'){
+                  $order->acquirer = $notif->acquirer;
+                }
+                $order->save();
+
+                $this->order_history->create([
+                  "order_id" => $order->id,
+                  "action"   => ucwords($transaction)
+                ]);
+
+                SendUserOrder::dispatch($order->order_no);
+                //SendAdministratorNotifOrder::dispatch($order->order_no);
+            }
+
+            echo "sukses";
+        } catch (\Exception $e) {
+            echo "failed";
+        }
+
+//         {
+//   "status_code": "200",
+//   "status_message": "midtrans payment notification",
+//   "transaction_id": "1c28dbbb-8596-48e4-85d7-9f1382db8a1f",
+//   "order_id": "order03",
+//   "gross_amount": "275000.00",
+//   "payment_type": "gopay",
+//   "transaction_time": "2016-06-19 15:54:42",
+//   "transaction_status": "settlement",
+//   "signature_key": "973d175e6368ad844b5817882489e6b22934d796a41a0573c066b1e64532dc0001087b87d877a3eac37cba20a733e1305f5e62739e65ff501d5d33c5ac62530f"
+// }
+
+// {
+//   "va_numbers": [
+//     {
+//       "va_number": "812785002530231",
+//       "bank": "bca"
+//     }
+//   ],
+//   "transaction_time": "2019-10-23 16:33:49",
+//   "transaction_status": "pending",
+//   "transaction_id": "be03df7d-2f97-4c8c-a53c-8959f1b67295",
+//   "status_message": "midtrans payment notification",
+//   "status_code": "201",
+//   "signature_key": "b07e6b0c6e7786363f9d7c1502e1171143fefe38e1a2bb93bce87e0fb64dd2ddfbbc8c7d60c6dcd7d6d8edb22169fd46e2250a6a547aa9f3f6da206a63334360",
+//   "payment_type": "bank_transfer",
+//   "payment_amounts": [
+
+//   ],
+//   "order_id": "1571823229",
+//   "merchant_id": "G812785002",
+//   "gross_amount": "44000.00",
+//   "fraud_status": "accept",
+//   "currency": "IDR"
+// }
+        
+    }
+
+    private function createOrder($user_id,$order_no,$data,$carts)
+    {
+
+      \DB::beginTransaction();
+      try {
+        $order=$this->order->create([
+          "user_id"=>$user_id,
+          "order_no"=>$order_no,
+          "billing_first_name" =>$data['billing_first_name'],
+          "billing_last_name"  =>$data['billing_last_name'],
+          "billing_email"      =>$data['billing_email'],
+          "billing_phone"      =>$data['billing_phone'],
+          "billing_province_id"   =>$data['billing_province']['id'],
+          "billing_jne_city_id"    =>$data['billing_jne_city_id'],
+          "billing_jne_city_label" =>$data['billing_jne_city_label'],
+          "billing_post_code"  =>$data['billing_post_code'],
+          "billing_address"    =>$data['billing_address'],
+          "order_note"         =>$data['shipping_note'],
+
+          "shipping_first_name" =>$data['shipping_first_name'],
+          "shipping_last_name"  =>$data['shipping_last_name'],
+          "shipping_email"      =>$data['shipping_email'],
+          "shipping_phone"      =>$data['shipping_phone'],
+          "shipping_province_id"   =>$data['shipping_province']['id'],
+          "shipping_jne_city_id"    =>$data['shipping_jne_city_id'],
+          "shipping_jne_city_label" =>$data['shipping_jne_city_label'],
+          "shipping_post_code"  =>$data['shipping_post_code'],
+          "shipping_address"    =>$data['shipping_address'],
+          "jne_shipping_method" =>$data['shipping_type'],
+          "jne_shipping_value"  =>$data['shipping_cost'],
+          "free_shipping"       =>$data['free_shipping'],
+          "order_status"        =>1,
+          "tax_vat"             =>$this->company_profile->first()->tax_vat,
+          "total_weight"        =>$data['total_weight'],
+        ]);
+
+        $price = 0;
+        $subtotal=0;
+        foreach($carts as $cart){
+          $items[] =[
+            "order_id"=>$order->id
+            ,"product_detail_id"=>$cart->product_detail_id
+            ,"quantity"=>$cart->qty
+            ,"sale"=>$cart->sale
+            ,"price"=>$cart->product_price
+          ];
+          $this->product_detail->where("id",$cart->product_detail_id)->decrement('stock',$cart->qty);
+
+          $price = $cart->product_price - ($cart->product_price * $cart->sale / 100);
+          $subtotal += $price *$cart->qty;
+        }
+        $tax = ($order->tax_vat * $subtotal /100);
+        if($order->free_shipping > $order->jne_shipping_value and $order->free_shipping>0){
+          $grandtotal = $subtotal + $tax + 0;
+        }else{
+          $grandtotal = $subtotal + $tax + $order->jne_shipping_value - $order->free_shipping;
+        }
+
+        $this->order_detail->insert($items);
+        $this->order_history->create([
+          "order_id" => $order->id,
+          "action"   => "Pending"
+        ]);
+        $this->cart->where('user_id',$user_id)->delete();
+
+        $update_order = Order::find($order->id);
+        $update_order->total_price = $grandtotal;
+        $update_order->save();
+
+        \DB::commit();
+        return $update_order;
       } catch (\Exception $e) {
 
         \DB::rollback();

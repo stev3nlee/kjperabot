@@ -58,6 +58,7 @@
 								<div class="checkout-desc">{{ $dataOrder['billing_post_code'] }}</div>
 							</div>
 						</div>
+						<?php /* ?>
 						<div class="title mt50"> Tahap Pembayaran </div>
 						<div class="bank-method">Transfer Bank</div>
 						<div class="bank-img">
@@ -68,8 +69,8 @@
 						<div class="trf-bank-no bold mt30">NOMOR AKUN BANK</div>
 						<div class="trf-bank-no">{{ $bank->account_no }}</div>
 						<div class="checkout-header mt30">Detil tentang metode pembayaran bank transfer</div>
-						<div class="checkout-desc">{!! $page->page_description !!}</div>
-						<div class="mt90 hidden-xs">
+						<div class="checkout-desc">{!! $page->page_description !!}</div><?php */ ?>
+						<div class="mt90 hidden-xs"> 
               <form action="{{ url('checkout/review') }}" method="post">
                 {{csrf_field()}}
                 <input type="hidden" name="data_order" value="{{ json_encode($dataOrder) }}"/>
