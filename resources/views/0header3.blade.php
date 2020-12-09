@@ -35,11 +35,6 @@
 	<script type="text/javascript" src="{{ asset('js/owl/owl.carousel.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/web.js') }}"></script>
 
-	<style>
-		.fix-wa { position: fixed; right: 20px; bottom: 15px; z-index: 100; border-radius:30px;  }
-		.fix-wa img { border-radius:30px; width:105px;}
-	</style>
-	
 </head>
 <body>
 

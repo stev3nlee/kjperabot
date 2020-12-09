@@ -126,7 +126,7 @@
 										<li> <a href="{{ url('/category') }}"> <div>Kategori</div> </a> </li>
 										<li> <a href="{{ url('/contact') }}"> <div>Kontak Kami</div> </a> </li>
 										<li> <a href="{{ url('/about') }}"> <div>Tentang Kami</div> </a> </li>
-										<li> <a href="{{ url('/article') }}"> <div>Artikel</div> </a> </li>
+										<!--<li> <a href="{{ url('/article') }}"> <div>Artikel</div> </a> </li>-->
 									</ul>
 								</div>
 							</div>

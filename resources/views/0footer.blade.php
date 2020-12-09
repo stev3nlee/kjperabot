@@ -15,7 +15,7 @@
 						<ul class="list-footer">
 							<li><a href="{{ url('/') }}">Beranda</a></li>
 							<li><a href="{{ url('/about') }}">Tentang kami</a></li>
-							<li><a href="{{ url('/article') }}">Artikel</a></li>
+							<!--<li><a href="{{ url('/article') }}">Artikel</a></li>-->
 							<li><a href="{{ url('/career') }}">Karir</a></li>
 						</ul>
 					</div>
@@ -124,9 +124,11 @@
 		<div class="list mb15">
 			<a href="{{ url('/about') }}">Tentang Kami</a>
 		</div>
+		<!--
 		<div class="list mb15">
 			<a href="{{ url('/article') }}">Artikel</a>
 		</div>
+		-->
 		<div class="list mb15">
 			<a href="{{ url('/career') }}">Karir</a>
 		</div>
