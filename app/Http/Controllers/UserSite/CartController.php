@@ -35,7 +35,12 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
       $product_detail_id=$request->input('product_detail_id');
-      $quantity=($request->input('quantity') == 0 or $request->input('quantity') == null ? 1 : $request->input('quantity'));
+      //$quantity=($request->input('quantity') == 0 or $request->input('quantity') == null ? 1 : $request->input('quantity'));
+      if($request->input('quantity') == 0 or $request->input('quantity') == null){
+        $quantity = 1;
+      }else{
+        $quantity = $request->input('quantity');
+      }
       try {
           \DB::beginTransaction();
           if($request->input('cart_id') != null){
