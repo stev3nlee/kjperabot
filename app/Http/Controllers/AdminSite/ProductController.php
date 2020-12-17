@@ -224,8 +224,8 @@ class ProductController extends Controller
     {
       $product = Product::findOrFail($request->input('id'));
       $product_detail = Product_detail::where('product_id',$product->id)->pluck('id');
-      $order = Order_detail::leftjoin('orders','order_details.order_id','=','orders.id')->whereIn('order_details.product_detail_id',$product_detail)->where('order_status','<',4)->whereNull('jne_track')->first();
-      if(empty($order)){
+      // $order = Order_detail::leftjoin('orders','order_details.order_id','=','orders.id')->whereIn('order_details.product_detail_id',$product_detail)->where('order_status','<',4)->whereNull('jne_track')->first();
+      // if(empty($order)){
         \DB::beginTransaction();
         try {
           $product->delete();
@@ -238,9 +238,9 @@ class ProductController extends Controller
           Parent::h_flash('There is an error inside the data. Please contact your administrator.','danger');
           return redirect()->back();
         }
-      }else{
-        Parent::h_flash('You cannot delete this color as this product has already been ordered.','warning');
-        return redirect()->back();
-      }
+      // }else{
+      //   Parent::h_flash('You cannot delete this color as this product has already been ordered.','warning');
+      //   return redirect()->back();
+      // }
     }
 }

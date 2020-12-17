@@ -41,6 +41,7 @@ class Order extends Model
       ,'payment_method'
       ,'total_price'
       ,'va_number'
+      ,'return_stock'
     ];
 
     public function scopeByUser($query,$user_id)

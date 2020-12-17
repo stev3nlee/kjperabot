@@ -9,7 +9,7 @@ class Midtrans
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('constants.MIDTRANS_SERVER_KEY');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isProduction = true;
         // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
@@ -63,10 +63,10 @@ class Midtrans
             'enabled_payments' => $payment_account,
             'gopay' => array(
               'enable_callback' => true,
-              'callback_url' => "https://charlie.kjperabot.co.id/checkout-success"
+              'callback_url' => "https://kjperabot.co.id/checkout-success"
             ),
             'shopeepay' => array(
-              'callback_url' => "https://charlie.kjperabot.co.id/checkout-success"
+              'callback_url' => "https://kjperabot.co.id/checkout-success"
             )
         );
         $snapToken = \Midtrans\Snap::getSnapToken($params);

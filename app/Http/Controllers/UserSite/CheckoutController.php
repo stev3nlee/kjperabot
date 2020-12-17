@@ -526,7 +526,7 @@ class CheckoutController extends Controller
         try {
             \Midtrans\Config::$serverKey = config('constants.MIDTRANS_SERVER_KEY');
             // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-            \Midtrans\Config::$isProduction = false;
+            \Midtrans\Config::$isProduction = true;
             $notif = new \Midtrans\Notification();
 
             $transaction = $notif->transaction_status;
@@ -583,6 +583,19 @@ class CheckoutController extends Controller
                     $transaction = 'success';
                 }
 
+                if($transaction == 'expire' && $order->return_stock == 0){
+                  $details = Order_detail::getProductByOrderId($order->id)->get();
+
+                  foreach($details as $detail){
+                    $product_detail = Product_detail::where('id',$detail->product_detail_id)->first();
+                    if($product_detail){
+                      $product_detail->stock = $product_detail->stock + $detail->quantity;
+                      $product_detail->save();
+                    }
+                  }
+                  $order->return_stock = 1;
+                }
+
                 $payment_detail->status = $transaction;
                 $payment_detail->signature = $notif->signature_key;
                 $payment_detail->tansaction_id = $notif->transaction_id;
@@ -594,7 +607,12 @@ class CheckoutController extends Controller
                 $order->order_status = $order_status;
 
                 if($type == 'bank_transfer'){
-                  $order->va_number = $notif->va_numbers[0]->va_number;
+                  if(isset($notif->permata_va_number)){
+                    $order->va_number = $notif->permata_va_number;
+                  }
+                  if(isset($notif->va_numbers[0]->va_number)){
+                    $order->va_number = $notif->va_numbers[0]->va_number;
+                  }
                 }
                 else if($type == 'qris'){
                   $order->acquirer = $notif->acquirer;
@@ -607,6 +625,9 @@ class CheckoutController extends Controller
                 ]);
 
                 SendUserOrder::dispatch($order->order_no);
+                if($transaction == 'settlement'){
+                    SendAdministratorNotifOrder::dispatch($order->order_no);
+                }
                 //SendAdministratorNotifOrder::dispatch($order->order_no);
             }
 

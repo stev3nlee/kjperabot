@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Confirm_payment;
 use App\Models\Order;
+use App\Models\Order_detail;
 use App\Models\Order_history;
 use App\Models\Product_detail;
 use App\Jobs\SendUserOrder;
@@ -118,9 +119,21 @@ class OrderController extends Controller
     public function deleteOrder(Request $request)
     {
       $order = Order::findOrFail($request->input('id'));
-      if($order->order_status == 4)
-      {
+      // if($order->order_status == 4)
+      // {
         try {
+          if($order->order_status != 3 && $order->return_stock == 0 ){
+            $details = Order_detail::getProductByOrderId($order->id)->get();
+
+                  foreach($details as $detail){
+                    $product_detail = Product_detail::where('id',$detail->product_detail_id)->first();
+                    if($product_detail){
+                      $product_detail->stock = $product_detail->stock + $detail->quantity;
+                      $product_detail->save();
+                    }
+                  }
+            $order->return_stock = 1;
+          }
           $order->is_deleted = 1;
           $order->save();
           Parent::h_flash('Deleted.','success');
@@ -129,10 +142,10 @@ class OrderController extends Controller
           Parent::h_flash('There is an error inside the data. Please contact your administrator.','danger');
           return redirect()->back();
         }
-      }else{
-        Parent::h_flash('Cannot delete, order payment status should canceled.','warning');
-        return redirect()->back();
-      }
+      // }else{
+      //   Parent::h_flash('Cannot delete, order payment status should canceled.','warning');
+      //   return redirect()->back();
+      // }
 
     }
 }
