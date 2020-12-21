@@ -23,6 +23,7 @@
 
 	<script>var site_url = '';</script>
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/simple-pagination/jquery.simplePagination.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/accordion/jquery-ui.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/dataTable/jquery.dataTables.min.js')}}"></script>

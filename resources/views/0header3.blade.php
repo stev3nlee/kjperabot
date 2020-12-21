@@ -24,6 +24,7 @@
 
 
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/typeahead.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/jquery.number.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/accordion/jquery-ui.js') }}"></script>

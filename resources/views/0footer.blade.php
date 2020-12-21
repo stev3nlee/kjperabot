@@ -139,6 +139,25 @@
 			<a href="{{ url('/terms-conditions') }}">Syarat dan Ketentuan</a>
 		</div>
 	</div>
+	<!-- NEW -->
+	<div class="t-footer">Join Our Newsletter</div>
+	<form action="https://kjperabot.co.id/newsletter/subscribe" method="post">
+		<input type="hidden" name="_token" value="Uh4vqwwqjLILG8net5RMit5b4jnbIuvAnxIDRXhE">
+		<div class="input-group">
+			<input type="email" class="form-control form-email" required="required" id="subscribe-email" name="email" placeholder="E-mail Address">
+			<span class="input-group-addon">
+				<input type="submit" class="btn btn-subs btn-subscribe" value="SUBMIT">
+			</span>
+		</div>
+	</form>
+	<div class="mt20">
+		<ul class="list-soc">
+			Follow us :
+			<li><a href="{{ $company->facebook }}" target="_blank"><img src="{{ asset('icons/fb.svg') }}" class="img-responsive"></a></li>
+			<li><a href="{{ $company->instagram }}" target="_blank"><img src="{{ asset('icons/ig.svg') }}" class="img-responsive"></a></li>
+		</ul>
+	</div>
+	<!-- END NEW -->
 </div>
 <div class="spinner text-center" style="display:none">
 	<img src="{{ asset('icons/Spinner.gif') }}" />

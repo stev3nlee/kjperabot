@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.1') }}">
 
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/accordion/jquery-ui.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/dataTable/jquery.dataTables.min.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/dataTable/dataTables.bootstrap.min.js')}}"></script>

@@ -23,6 +23,7 @@
 
 	<!-- JS-->
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/jquery.number.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/accordion/jquery-ui.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/dataTable/jquery.dataTables.min.js')}}"></script>
