@@ -259,6 +259,7 @@ textarea.form-control { height: 120px; resize: none; line-height: 1.8; border: 1
 
 .form-control.input-search { width: 300px; margin-bottom:50px; }
 
+.home-new-product.white { background-color: white; }
 .home-best-seller, .home-new-product, .home-article, .home-testimony { background-color: #fff; padding: 50px 0 70px 0; line-height:20px; font-size:16px; }
 .home-new-product, .home-testimony { background-color: #f7f7f7; }
 .home-best-seller .title, .home-new-product .title, .home-article .title, .home-testimony .title { font-size: 18px; margin-bottom:40px; }
@@ -271,6 +272,8 @@ textarea.form-control { height: 120px; resize: none; line-height: 1.8; border: 1
 .art-title { margin-bottom:10px; }
 .art-desc { font-size:12px; font-style:italic; color:#777; margin-bottom:10px; }
 .art-more { font-size:12px; font-weight:600 !important; line-height:14px; color: #30318b; }
+.home-new-product.white { background-color: white; }
+.home-best-seller.grey { background-color: #f7f7f7; }
 /* End Index */
 
 /* Product */
@@ -637,7 +640,7 @@ ul li a.toggle { display: block; }
   /* NEW */
   .home-best-seller { display: none; }
   .home-new-product { display: none; }
-  #footer { display: none; }
+  #footer { padding: 15px 0; }
   .bg-tab { display: block; }
   .bg-tab .t-tab { font-size: 18px; margin-bottom: 20px; }
   .bg-tab ul.nav-tabs > li > a { margin-right: 5px; padding: 7px 10px; border-radius: 0; background-color: #eeeeee; }

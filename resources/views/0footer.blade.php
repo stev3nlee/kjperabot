@@ -6,7 +6,7 @@
 
 		<footer id="footer">
 			<div class="container">
-				<div class="row">
+				<div class="row hidden-xs">
 					<div class="col-md-2 hidden-sm hidden-xs">
 						<div class="img-logo"><a href="{{ url('/') }}"><img src="{{ asset($company->logo_path) }}" class="img-responsive"/></a></div>
 					</div>
