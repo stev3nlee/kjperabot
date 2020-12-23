@@ -643,7 +643,8 @@ ul li a.toggle { display: block; }
   #footer { padding: 15px 0; }
   .bg-tab { display: block; }
   .bg-tab .t-tab { font-size: 18px; margin-bottom: 20px; }
-  .bg-tab ul.nav-tabs > li > a { margin-right: 5px; padding: 7px 10px; border-radius: 0; background-color: #eeeeee; }
+  .bg-tab ul.nav-tabs > li { margin-right: 0; width: 25%; }
+  .bg-tab ul.nav-tabs > li > a { margin-right: 5px; text-align: center; padding: 7px 10px; border-radius: 0; background-color: #eeeeee; }
   .bg-tab ul.nav-tabs > li.active > a { background-color: white; }
   .bg-tab .tab-content { background-color: white; padding-top: 10px; }
   .bg-tab .tab-content .product-price { margin-bottom: 0; text-align: left; }
