@@ -553,7 +553,7 @@ ul li a.toggle { display: block; }
   #header3 ul li a { font-size: 12px; padding-bottom:4px; }
   .home-best-seller, .home-new-product, .home-article, .home-testimony { padding: 40px 0; }
   .home-best-seller .title, .home-new-product .title, .home-article .title, .home-testimony .title { font-size: 18px; margin-bottom:30px; }
-  .product-name { font-size: 12px; margin-top:10px; margin-bottom:5px; height: 35px; overflow:hidden; }
+  .product-name { font-size: 12px; margin-top:10px; margin-bottom:5px; height: 35px; }
   .product-price { font-size: 11px; }
   .product-price-code { font-size: 10px; }
 
@@ -647,7 +647,7 @@ ul li a.toggle { display: block; }
   .bg-tab ul.nav-tabs > li.active > a { background-color: white; }
   .bg-tab .tab-content { background-color: white; padding-top: 10px; }
   .bg-tab .tab-content .product-price { margin-bottom: 0; text-align: left; }
-  .bg-tab .tab-content .product-name { text-align: left; line-height: 15px; height: 30px; overflow:hidden; }
+  .bg-tab .tab-content .product-name { text-align: left; line-height: 15px; height: 30px;}
   .bg-tab .tab-content .row { margin-left: -5px; margin-right: -5px; }
   .bg-tab .tab-content .row > div { padding-left: 5px; padding-right: 5px; }
   .bg-tab .tab-content .category-name { margin: 0 0 7px; font-size: 15px; line-height: 20px; }
