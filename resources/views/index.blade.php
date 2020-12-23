@@ -147,7 +147,7 @@
 
 	<div class="home-new-product white">
 		<div class="container">
-			<div class="title"> Produk Terlaku </div>
+			<div class="title"> Produk Terlaris </div>
 			<div class="row">
 				@foreach($hotProduts as $product)
 				<div class="col-md-3 col-sm-3 col-xs-6">
@@ -227,7 +227,7 @@
 	@else
 	<div class="home-new-product">
 		<div class="container">
-			<div class="title"> Produk Terlaku </div>
+			<div class="title"> Produk Terlaris </div>
 			<div class="row">
         @foreach($hotProduts as $product)
 				<div class="col-md-3 col-sm-3 col-xs-6">
@@ -261,7 +261,7 @@
 					<a class="nav-link" id="terbaru-tab" data-toggle="tab" href="#terbaru" role="tab" aria-controls="terbaru" aria-selected="false">Terbaru</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="terlaku-tab" data-toggle="tab" href="#terlaku" role="tab" aria-controls="terlaku" aria-selected="false">Terlaku</a>
+					<a class="nav-link" id="terlaku-tab" data-toggle="tab" href="#terlaku" role="tab" aria-controls="terlaku" aria-selected="false">Terlaris</a>
 				</li>
 			</ul>
 		</div>
