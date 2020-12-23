@@ -47,6 +47,7 @@
 		</div>
 	</div>
 
+	<!--
 	<div class="home-new-product content">
 	    <div class="container">
 	        <div class="contact">
@@ -78,6 +79,7 @@
 	        </div>
 	    </div>
 	</div>
+	-->
 
 	@if(count($saleProduts)>0)
 	<div class="home-new-product white">
@@ -100,6 +102,7 @@
 	</div>
 	@endif
 
+	<!--
 	<div class="home-best-seller grey">
 		<div class="container">
 			<div class="title"> Produk Terbaru </div>
@@ -140,6 +143,7 @@
 			</div>
 		</div>
 	</div>
+	-->
 
 	<div class="home-new-product white">
 		<div class="container">
@@ -200,6 +204,7 @@
 		</div>
 	</div>
 
+	<!--
 	@if(count($saleProduts)>0)
 		<div class="home-best-seller">
 			<div class="container">
@@ -239,6 +244,7 @@
 		</div>
 	</div>
 	@endif
+	-->
 
 	<!-- NEW -->
 	<div class="bg-tab">
