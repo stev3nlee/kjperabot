@@ -2,44 +2,13 @@
 
 @section('content')
 
-<!--
-	<div class="home-search-mobile visible-xs">
-		<div class="search-center">
-			<form action="{{ url('/search') }}" method="get">
-				<div class="home-search-box form-control">
-					<input type="text" name="q" placeholder="Cari nama produk.."/>
-					<button type="submit" class="btn">CARI</button>
-				</div>
-			</form>
-		</div>
-	</div>
--->
-
 	<div id="home-banner">
-		<!--
-		<div class="center-slider hidden-xs">
-			<div class="h700">
-				<div class="tbl">
-					<div class="cell">
-						<div class="home-search">
-							<div class="search-center">
-								<form action="{{ url('/search') }}" method="get">
-									<div class="search-box form-control">
-										<input type="text" name="q" placeholder="Cari nama produk.."/>
-										<button type="submit" class="btn">CARI</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		-->
 		<div id="slider-banner" class="owl-carousel">
 				@foreach($sliders as $slider)
 				<div class="item">
-					<div class="img-banner" style="background:url('{{ asset($slider->image_path) }}') no-repeat center 0;"></div>
+					<div class="img-banner">
+						<img src="{{ asset($slider->image_path) }}" alt="" title=""/>
+					</div>
 					<div class="overlay"></div>
 				</div>
 				@endforeach
@@ -47,47 +16,13 @@
 		</div>
 	</div>
 
-	<!--
-	<div class="home-new-product content">
-	    <div class="container">
-	        <div class="contact">
-	            <div class="title">Kategori</div>
-	            @foreach($categories as $category)
-	            <div class="category-box mt50">
-	                <div class="row">
-	                    <div class="col-md-3 col-sm-3 col-xs-12">
-	                        <div class="category-name">
-	                            <a href="{{ url('/product/'.$category->category_slug) }}">
-	                                {{ $category->category_name }}
-	                            </a>
-	                        </div>
-	                    </div>
-	                    <div class="col-md-9 col-sm-9 col-xs-12">
-	                        <div class="row">
-	                            <div class="col-md-4 col-sm-4 col-xs-12">
-	                                <ul class="category-list">
-	                                    @foreach($category->subcategories as $subcategory)
-										<li> <a href="{{ url('/product/'.$category->category_slug.'/'.$subcategory->subcategory_slug) }}"> {{$subcategory->subcategory_name}} </a> </li>
-										@endforeach
-	                                </ul>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	            @endforeach
-	        </div>
-	    </div>
-	</div>
-	-->
-
 	@if(count($saleProduts)>0)
-	<div class="home-new-product white">
+	<div class="home-new-product white hidden-xs">
 		<div class="container">
 			<div class="title"> Promo </div>
 			<div class="row">
 				@foreach($saleProduts as $product)
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-3 col-sm-3 col-xs-6 item-four">
 					<div class="product-box">
 						<a href="{{ url('/product-detail/'.$product->slug) }}">
 							<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
@@ -102,55 +37,12 @@
 	</div>
 	@endif
 
-	<!--
-	<div class="home-best-seller grey">
-		<div class="container">
-			<div class="title"> Produk Terbaru </div>
-			<div class="row">
-				<div class="hidden-xs">
-			        @foreach($newProducts as $new)
-    				<div class="col-md-3 col-sm-3 col-xs-6">
-						<div class="product-box">
-							<a href="{{ url('/product-detail/'.$new->slug) }}">
-								<div class="product-img"><img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
-								<div class="product-name text-center"> {{ $new->product_name }} </div>
-								<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale != null ? $new->product_price - ($new->sale * $new->product_price / 100) : $new->product_price)) }} </div>
-							</a>
-						</div>
-					</div>
-					@endforeach
-				</div>
-			</div>
-
-			<div class="visible-xs">
-				@foreach($newProducts as $new)
-				@if($loop->index % 2 == 0 or $loop->index == 0) @if($loop->index!=0) </div> @endif <div class="row"> @endif
-					<div class="col-xs-6">
-						<div class="product-box">
-							<a href="{{ url('/product-detail/'.$new->slug) }}">
-								<div class="product-img"> <img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
-								<div class="product-name text-center"> {{ $new->product_name }} </div>
-								<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale != null ? $new->product_price - ($new->sale * $new->product_price / 100) : $new->product_price)) }} </div>
-							</a>
-						</div>
-					</div>
-				@if($loop->last)</div>@endif
-				@endforeach
-			</div>
-			
-			<div class="more-product">
-				<a href="{{ url('/product?urut=terbaru&order=40') }}"> More → </a>
-			</div>
-		</div>
-	</div>
-	-->
-
-	<div class="home-new-product white">
+	<div class="home-new-product white hidden-xs">
 		<div class="container">
 			<div class="title"> Produk Terlaris </div>
 			<div class="row">
 				@foreach($hotProduts as $product)
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-3 col-sm-3 col-xs-6 item-four">
 					<div class="product-box">
 						<a href="{{ url('/product-detail/'.$product->slug) }}">
 							<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
@@ -164,15 +56,15 @@
 		</div>
 	</div>
 
-	<div class="home-best-seller">
+	<div class="home-best-seller hidden-xs">
 		<div class="container">
 			<div class="title"> Produk Terbaru </div>
 			<div class="row">
 				<div class="hidden-xs">
         @foreach($newProducts as $new)
-				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="col-md-3 col-sm-3 col-xs-6 item-four">
 					<div class="product-box">
-						<a href="{{ url('/product-detail/'.$new->slug) }}">
+					<a href="{{ url('/product-detail/'.$new->slug) }}">
 							<div class="product-img"> <img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
 							<div class="product-name text-center"> {{ $new->product_name }} </div>
 							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale != null ? $new->product_price - ($new->sale * $new->product_price / 100) : $new->product_price)) }} </div>
@@ -185,7 +77,7 @@
 				<div class="visible-xs">
 					@foreach($newProducts as $new)
 						@if($loop->index % 2 == 0 or $loop->index == 0) @if($loop->index!=0) </div> @endif <div class="row"> @endif
-					<div class="col-xs-6">
+					<div class="col-xs-6 item-two">
 						<div class="product-box">
 							<a href="{{ url('/product-detail/'.$new->slug) }}">
 								<div class="product-img"> <img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
@@ -203,48 +95,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!--
-	@if(count($saleProduts)>0)
-		<div class="home-best-seller">
-			<div class="container">
-				<div class="title"> Produk Diskon </div>
-				<div class="row">
-	        @foreach($saleProduts as $product)
-					<div class="col-md-3 col-sm-3 col-xs-6">
-						<div class="product-box">
-							<a href="{{ url('/product-detail/'.$product->slug) }}">
-								<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
-								<div class="product-name text-center"> {{ $product->product_name }} </div>
-								<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
-							</a>
-						</div>
-					</div>
-	        @endforeach
-				</div>
-			</div>
-		</div>
-	@else
-	<div class="home-new-product">
-		<div class="container">
-			<div class="title"> Produk Terlaris </div>
-			<div class="row">
-        @foreach($hotProduts as $product)
-				<div class="col-md-3 col-sm-3 col-xs-6">
-					<div class="product-box">
-						<a href="{{ url('/product-detail/'.$product->slug) }}">
-							<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
-							<div class="product-name text-center"> {{ $product->product_name }} </div>
-							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
-						</a>
-					</div>
-				</div>
-        @endforeach
-			</div>
-		</div>
-	</div>
-	@endif
-	-->
 
 	<!-- NEW -->
 	<div class="bg-tab">
@@ -286,7 +136,7 @@
 				<div class="container">
 					<div class="row">
 						@foreach($saleProduts as $product)
-						<div class="col-xs-6">
+						<div class="col-xs-6 item-two">
 							<div class="product-box">
 								<a href="{{ url('/product-detail/'.$product->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
@@ -303,7 +153,7 @@
 				<div class="container">
 					<div class="row">
         				@foreach($newProducts as $new)
-						<div class="col-xs-6">
+						<div class="col-xs-6 item-two">
 							<div class="product-box">
 								<a href="{{ url('/product-detail/'.$new->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
@@ -320,7 +170,7 @@
 				<div class="container">
 					<div class="row">
         				@foreach($hotProduts as $product)
-						<div class="col-xs-6">
+						<div class="col-xs-6 item-two">
 							<div class="product-box">
 								<a href="{{ url('/product-detail/'.$product->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>

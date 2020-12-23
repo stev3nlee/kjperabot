@@ -24,7 +24,7 @@
 						<ul class="list-footer">
 							<li><a href="{{ url('/product') }}">Produk</a></li>
 							<li><a href="{{ url('/category') }}">Kategori</a></li>
-							<li><a href="{{ url('/confirm-payment') }}">Konfirmasi Pembayaran</a></li>
+							<!-- <li><a href="{{ url('/confirm-payment') }}">Konfirmasi Pembayaran</a></li> -->
 						</ul>
 					</div>
 					<div class="col-sm-3 col-md-2">
@@ -55,6 +55,7 @@
 								Follow us :
 								<li><a href="{{ $company->facebook }}" target="_blank"><img src="{{ asset('icons/fb.svg') }}" class="img-responsive"></a></li>
 								<li><a href="{{ $company->instagram }}" target="_blank"><img src="{{ asset('icons/ig.svg') }}" class="img-responsive"></a></li>
+								<li><a href="https://vt.tiktok.com/ZSnWF3Ud/" target="_blank"><img src="{{ asset('icons/tiktok.svg') }}" class="img-responsive"></a></li>
 							</ul>
 						</div>
 					</div>
@@ -118,9 +119,9 @@
 		</div>
 	</div>
 	<div class="border-menu">
-		<div class="list mb15">
+		<!-- <div class="list mb15">
 			<a href="{{ url('/confirm-payment') }}">Konfirmasi Pembayaran</a>
-		</div>
+		</div> -->
 		<div class="list mb15">
 			<a href="{{ url('/about') }}">Tentang Kami</a>
 		</div>
@@ -155,6 +156,7 @@
 			Follow us :
 			<li><a href="{{ $company->facebook }}" target="_blank"><img src="{{ asset('icons/fb.svg') }}" class="img-responsive"></a></li>
 			<li><a href="{{ $company->instagram }}" target="_blank"><img src="{{ asset('icons/ig.svg') }}" class="img-responsive"></a></li>
+			<li><a href="https://vt.tiktok.com/ZSnWF3Ud/" target="_blank"><img src="{{ asset('icons/tiktok.svg') }}" class="img-responsive"></a></li>
 		</ul>
 	</div>
 	<!-- END NEW -->
