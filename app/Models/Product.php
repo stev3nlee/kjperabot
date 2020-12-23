@@ -43,7 +43,7 @@ class Product extends Model
                               ]);
       $query->having('total_stock', '>', 0);
       $query->orderby("total_sales","desc");
-      $query->limit(4);
+      $query->limit(16);
       return $query;
     }
 
@@ -52,7 +52,7 @@ class Product extends Model
       $query->select("products.slug","products.product_name","products.product_price","products.image_path","products.sale","products.updated_at");
       $query->where("sale","!=",0);
       $query->orderby("updated_at","desc");
-      $query->limit(4);
+      $query->limit(16);
       return $query;
     }
 

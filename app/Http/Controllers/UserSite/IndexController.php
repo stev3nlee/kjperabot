@@ -48,9 +48,10 @@ class IndexController extends Controller
                           'product_details AS total_stock' => function ($query) {
                                       $query->select(DB::raw("SUM(stock) as total_stock"));
                                   }
-                              ])->having('total_stock', '>', 0)->orderby("created_at","desc")->limit(4)->get()
+                              ])->having('total_stock', '>', 0)->orderby("created_at","desc")->limit(16)->get()
         ,"newArticles"=>$this->article->orderby("created_at","desc")->limit(4)->get()
         ,"testimonies"=>$this->testimony->orderby("created_at","desc")->limit(4)->get()
+        ,"categories"=>$this->category->with('subcategories')->get()
       ]);
     }
 
