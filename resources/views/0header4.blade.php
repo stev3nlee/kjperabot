@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/fancybox/jquery.fancybox.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/simple-pagination/simplePagination.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/fonts.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.1') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?v.2') }}">
 
 	<script>var site_url = '';</script>
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
@@ -32,6 +32,12 @@
 	<script type="text/javascript" src="{{ asset('js/fancybox/jquery.fancybox.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/owl/owl.carousel.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/web.js') }}"></script>
+
+	<style>
+		.fix-wa { position: fixed; right: 20px; bottom: 15px; z-index: 100; border-radius:30px;  }
+		.fix-wa img { border-radius:30px; width:105px;}
+		.form-search.form-canvas { color:#000 !important; }
+	</style>
 
 </head>
 <body>
