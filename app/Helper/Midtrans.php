@@ -15,7 +15,7 @@ class Midtrans
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;  
 
-        $payment_account = ['gopay','bca_va','shopeepay'];
+        //$payment_account = ['gopay','bca_va','shopeepay'];
 
         $user = User::find($order->user_id);
         $items = [];
@@ -27,6 +27,21 @@ class Midtrans
                 "price" => $price,
                 "quantity" => $order_detail->quantity,
                 "name" => $order_detail->product_detail->product->product_name
+            ]);
+        }
+
+        if($order->free_shipping > $order->jne_shipping_value and $order->free_shipping>0){
+          $shipping = 0;
+        }else{
+          $shipping = $order->jne_shipping_value - $order->free_shipping;
+        }
+
+        if($shipping > 0){
+          array_push($items, [
+                "id" => 'shipping',
+                "price" => $shipping,
+                "quantity" => 1,
+                "name" => 'Shipping Fee'
             ]);
         }
 
@@ -60,14 +75,14 @@ class Midtrans
                   'postal_code' => $order->shipping_post_code,
                 )
             ),
-            'enabled_payments' => $payment_account,
-            'gopay' => array(
-              'enable_callback' => true,
-              'callback_url' => "https://kjperabot.co.id/checkout-success"
-            ),
-            'shopeepay' => array(
-              'callback_url' => "https://kjperabot.co.id/checkout-success"
-            )
+            //'enabled_payments' => $payment_account,
+            // 'gopay' => array(
+            //   'enable_callback' => true,
+            //   'callback_url' => "https://kjperabot.co.id/checkout-success"
+            // ),
+            // 'shopeepay' => array(
+            //   'callback_url' => "https://kjperabot.co.id/checkout-success"
+            // )
         );
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         try {

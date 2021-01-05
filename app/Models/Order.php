@@ -58,7 +58,7 @@ class Order extends Model
       ,'shipping_jne_city_id',"shipping_jne_city_label"
       ,"shipping_post_code","shipping_address","jne_shipping_method",'free_shipping'
       ,"order_status","jne_shipping_value","jne_track"
-      ,"tax_vat","orders.created_at","orders.updated_at","price","Sale","quantity","is_deleted","is_remindered","is_remindered_23");
+      ,"tax_vat","orders.created_at","orders.updated_at","price","Sale","quantity","is_deleted","is_remindered","is_remindered_23","payment_method","total_price","va_number","acquirer","return_stock");
       return $query;
     }
 

@@ -10,6 +10,7 @@ use App\Models\Product_detail;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Wishlist;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\User;
 use Auth;
 class ProductController extends Controller
@@ -72,7 +73,31 @@ class ProductController extends Controller
       $products = $products->bySearch($search);
     }
 
-    $products = $products->getOrder($orderby)->paginate($limit);
+    $data = [];
+    $products = $products->getOrder($orderby)->get();
+    foreach($products as $product){
+      if($product->totalstock > 0){
+        $data[] = $product;
+      }
+    }
+    foreach($products as $product){
+      if($product->totalstock <= 0){
+        $data[] = $product;
+      }
+    }
+    //dd($data);
+    $page = request()->has('page') ? request('page') : 1;
+    $perPage = $limit;
+    $offset = ($page * $perPage) - $perPage;
+
+    $newCollection = collect($data);
+        $products = new LengthAwarePaginator(
+            $newCollection->slice($offset, $perPage),
+            $newCollection->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
 
     if($search != null and count($products) == 0){
       return view('search-empty')->with([

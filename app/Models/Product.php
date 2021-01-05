@@ -71,7 +71,7 @@ class Product extends Model
                           'product_details AS totalstock' => function ($query) {
                                       $query->select(DB::raw("SUM(stock) as totalstock"));
                                   }
-                              ])->orderby("totalstock",'desc');
+                              ]);
       if($order == 'terbaru'){
         $query->orderby("products.id",'desc');
       }else{
