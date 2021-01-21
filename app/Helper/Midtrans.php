@@ -21,7 +21,7 @@ class Midtrans
         $items = [];
 
         foreach($order->order_details as $order_detail){
-            $price = $order_detail->price - ($order_detail->price * $order_detail->sale / 100);
+            $price = $order_detail->price - $order_detail->discount_amount;
             array_push($items, [
                 "id" => $order_detail->product_detail->product->product_code,
                 "price" => $price,

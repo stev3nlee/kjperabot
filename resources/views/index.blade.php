@@ -27,7 +27,7 @@
 						<a href="{{ url('/product-detail/'.$product->slug) }}">
 							<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
 							<div class="product-name text-center"> {{ $product->product_name }} </div>
-							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
+							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
 						</a>
 					</div>
 				</div>
@@ -47,7 +47,7 @@
 						<a href="{{ url('/product-detail/'.$product->slug) }}">
 							<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
 							<div class="product-name text-center"> {{ $product->product_name }} </div>
-							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
+							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
 						</a>
 					</div>
 				</div>
@@ -67,7 +67,8 @@
 					<a href="{{ url('/product-detail/'.$new->slug) }}">
 							<div class="product-img"> <img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
 							<div class="product-name text-center"> {{ $new->product_name }} </div>
-							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale != null ? $new->product_price - ($new->sale * $new->product_price / 100) : $new->product_price)) }} </div>
+
+							<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale_price != 0 ? $new->sale_price : $new->product_price)) }} </div>
 						</a>
 					</div>
 				</div>
@@ -82,7 +83,7 @@
 							<a href="{{ url('/product-detail/'.$new->slug) }}">
 								<div class="product-img"> <img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
 								<div class="product-name text-center"> {{ $new->product_name }} </div>
-								<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale != null ? $new->product_price - ($new->sale * $new->product_price / 100) : $new->product_price)) }} </div>
+								<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale_price != 0 ? $new->sale_price : $new->product_price)) }} </div>
 							</a>
 						</div>
 					</div>
@@ -125,7 +126,7 @@
 								<a href="{{ url('/product-detail/'.$new->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$new->image_path)[0]) }}" class="img-responsive"/> </div>
 									<div class="product-name text-center"> {{ $new->product_name }} </div>
-									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale != null ? $new->product_price - ($new->sale * $new->product_price / 100) : $new->product_price)) }} </div>
+									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($new->sale_price != 0 ? $new->sale_price : $new->product_price)) }} </div>
 								</a>
 							</div>
 						</div>
@@ -142,7 +143,7 @@
 								<a href="{{ url('/product-detail/'.$product->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
 									<div class="product-name text-center"> {{ $product->product_name }} </div>
-									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
+									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
 								</a>
 							</div>
 						</div>
@@ -159,7 +160,7 @@
 								<a href="{{ url('/product-detail/'.$product->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
 									<div class="product-name text-center"> {{ $product->product_name }} </div>
-									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format($product->product_price - ($product->sale * $product->product_price / 100)) }} </div>
+									<div class="product-price text-center"> <span class="product-price-code">RP</span>  {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
 								</a>
 							</div>
 						</div>

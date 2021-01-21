@@ -29,7 +29,7 @@
 								</div>
 								<div class="w250 text-center">
 									<div class="cart-header">Harga</div>
-									@php $price = ($cart->sale == 0 ? $cart->product_price : $cart->product_price - ($cart->product_price * $cart->sale / 100)) @endphp
+									@php $price = ($cart->sale_price == 0 ? $cart->product_price : $cart->sale_price) @endphp
 									<div class="cart-price">Rp. <span class="product_price">{{number_format($price)}}</span></div>
 								</div>
 	            @if($cart->total_stock > 0)
@@ -81,7 +81,7 @@
 								<div class="cart-header">{{$cart->product_name}}</div>
 								<div class="cart-color">Warna {{ $cart->color }}</div>
 								<div class="cart-input"><!--<input type="number" min="0" value="{{ $cart->qty }}" name="qty[]" class="form-control form-cart qty qty{{$cart->cart_id}}" data-id="{{$cart->cart_id}}">--><input id="txtboxToFilter" type="number" min="0" max="{{ $cart->total_stock }}" name="qty[]" value="{{ $cart->qty }}" class="form-control form-cart qty qty{{$cart->cart_id}}" data-id="{{$cart->cart_id}}"></div>
-								<div class="cart-price">Rp. <span class="product_price">{{number_format($cart->sale == 0 ? $cart->product_price : $cart->product_price - ($cart->product_price * $cart->sale / 100))}}</span></div>
+								<div class="cart-price">Rp. <span class="product_price">{{number_format($cart->sale == 0 ? $cart->product_price : $cart->sale_price)}}</span></div>
 								<span> <a href="{{ url('/product-detail/'.$cart->slug.'/'.$cart->cart_id) }}" class="btn btn-edit-cart"> EDIT </a> </span>
 								<span> <a onclick="delete_item({{$cart->cart_id}})" class="btn btn-remove-cart"> REMOVE </a> </span>
 							</div>

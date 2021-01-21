@@ -21,7 +21,11 @@
           @foreach($orders as $order)
 						@php $price = 0 ; @endphp
 						@foreach($order->order_details as $detail)
-							@php $price += ($detail->price - ( $detail->price * $detail->sale / 100 )) * $detail->quantity @endphp
+							@if($detail->sale)
+								@php $price += $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+							@else
+								@php $price += ($detail->price - $detail->discount_amount) * $detail->quantity; @endphp
+							@endif
 						@endforeach
 					<tr>
 						<td>

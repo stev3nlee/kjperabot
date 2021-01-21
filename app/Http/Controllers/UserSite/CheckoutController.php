@@ -719,10 +719,11 @@ class CheckoutController extends Controller
             ,"quantity"=>$cart->qty
             ,"sale"=>$cart->sale
             ,"price"=>$cart->product_price
+            ,"discount_amount"=>$cart->discount_amount
           ];
           $this->product_detail->where("id",$cart->product_detail_id)->decrement('stock',$cart->qty);
 
-          $price = $cart->product_price - ($cart->product_price * $cart->sale / 100);
+          $price = $cart->product_price - $cart->discount_amount;
           $subtotal += $price *$cart->qty;
         }
         $tax = ($order->tax_vat * $subtotal /100);

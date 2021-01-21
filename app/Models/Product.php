@@ -17,6 +17,8 @@ class Product extends Model
       ,"image_path"
       ,"sale"
       ,"weight"
+      ,"sale_price"
+      ,"discount_amount"
     ];
 
     public function subcategory()
@@ -32,10 +34,10 @@ class Product extends Model
 
     public function scopeGetByHotProduct($query)
     {
-      $query->select("products.slug","products.product_name","products.product_price","products.image_path","products.sale", \DB::raw('SUM(quantity) as total_sales'));
+      $query->select("products.slug","products.product_name","products.product_price","products.image_path","products.sale","products.sale_price","products.discount_amount", \DB::raw('SUM(quantity) as total_sales'));
       $query->leftjoin("product_details","product_details.product_id","products.id");
       $query->leftjoin("order_details","order_details.product_detail_id","product_details.id");
-      $query->groupby("products.id","products.slug","products.product_name","products.product_price","products.image_path","products.sale");
+      $query->groupby("products.id","products.slug","products.product_name","products.product_price","products.image_path","products.sale","products.sale_price","products.discount_amount");
       $query->withCount([
                           'product_details AS total_stock' => function ($query) {
                                       $query->select(DB::raw("SUM(stock) as total_stock"));
@@ -49,8 +51,8 @@ class Product extends Model
 
     public function scopeGetBySaleProduct($query)
     {
-      $query->select("products.slug","products.product_name","products.product_price","products.image_path","products.sale","products.updated_at");
-      $query->where("sale","!=",0);
+      $query->select("products.slug","products.product_name","products.product_price","products.image_path","products.sale","products.updated_at","products.sale_price","products.discount_amount");
+      $query->where("sale_price","!=",0);
       $query->orderby("updated_at","desc");
       $query->limit(16);
       return $query;
@@ -65,7 +67,8 @@ class Product extends Model
 
     public function scopeGetOrder($query,$order)
     {
-      $query->select('*',\DB::raw('product_price - ( product_price * sale / 100 ) AS total_price'));
+      //CASE WHEN sale_price IS NOT NULL THEN sale_price ELSE product_price END AS total_price
+      $query->select('*',\DB::raw('product_price - discount_amount AS total_price'));
       
       $query->withCount([
                           'product_details AS totalstock' => function ($query) {

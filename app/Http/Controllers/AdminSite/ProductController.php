@@ -51,7 +51,14 @@ class ProductController extends Controller
           $images.="images/uploads/".$filename."::";
         }
 
-
+        $discount_amount = 0;
+        if($request->input('sale_price')){
+          if($request->input('sale_price') > $request->input('price')){
+            Parent::h_flash('Sale price cannot be higher than product price.','danger');
+            return redirect()->back();
+          }
+          $discount_amount = $request->input('price') - $request->input('sale_price');
+        }
 
       try {
         \DB::beginTransaction();
@@ -64,7 +71,9 @@ class ProductController extends Controller
           ,"product_description" =>$request->input('product_description')
           ,"image_path"     =>$images
           ,"sale"           =>($request->input('sale') == "" ? 0 : $request->input('sale'))
+          ,"sale_price"     =>($request->input('sale_price') == "" ? 0 : $request->input('sale_price'))
           ,"weight"         =>($request->input('weight') ?? 0)
+          ,"discount_amount"=>$discount_amount
         ]);
 
         $data=array();
@@ -121,7 +130,14 @@ class ProductController extends Controller
         "product_description"=>"required",
       ]);
 
-
+      $discount_amount = 0;
+      if($request->input('sale_price')){
+        if($request->input('sale_price') > $request->input('price')){
+            Parent::h_flash('Sale price cannot be higher than product price.','danger');
+            return redirect()->back();
+        }
+        $discount_amount = $request->input('price') - $request->input('sale_price');
+      }
 
       $images=$product->image_path;
       if(!empty($request->file('image.*')))
@@ -147,7 +163,9 @@ class ProductController extends Controller
         $product->product_price  = $request->input('price');
         $product->product_description  = $request->input('product_description');
         $product->sale  = ($request->input('sale') ?? 0);
+        $product->sale_price  = ($request->input('sale_price') == "" ? 0 : $request->input('sale_price'));
         $product->weight  = $request->input('weight');
+        $product->discount_amount  = $discount_amount;
         $product->save();
         Parent::h_flash('You have successfully edited this product.','success');
         return redirect()->back();

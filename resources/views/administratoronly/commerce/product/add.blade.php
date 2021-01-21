@@ -51,11 +51,11 @@
 											</div>
 										</div>
 										<div class="display-inline">
-											<input type="text" class="form-control txtboxToFilter price" id="price" maxlength="12" name="price" value="{{ old('price') }}" onkeyup="calculate()" style="width:150px;" />
+											<input type="text" class="form-control txtboxToFilter price" id="price" maxlength="12" name="price" value="{{ old('price') }}"  style="width:150px;" />
 										</div>
 									</div>
 								</div>
-								<div class="display-inline mr10">
+								<!-- <div class="display-inline mr10">
 									<label>Sale</label>
 									<div class="clearfix">
 										<div class="display-inline mr10" style="width: 50px;">
@@ -69,7 +69,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="display-inline">
 									<label>Final Price</label>
 									<div class="clearfix">
@@ -81,7 +81,7 @@
 											</div>
 										</div>
 										<div class="display-inline">
-											<input type="text" class="form-control" id="total_price" maxlength="9" name="total_price" value="{{ old('total_price') }}" style="width:150px;" />
+											<input type="text" class="form-control txtboxToFilter price" id="total_price" maxlength="12" name="sale_price" value="{{ old('sale_price') }}" style="width:150px;" />
 										</div>
 									</div>
 								</div>

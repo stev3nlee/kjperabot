@@ -32,7 +32,7 @@
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="">
 							<div class="product-detail-name"> {{ $product->product_name }} </div>
-							<div class="product-detail-price"> <span class="product-price-code">RP</span> {{ number_format(($product->sale != 0 ? $product->product_price - ($product->product_price * $product->sale / 100) : $product->product_price)) }}</div>
+							<div class="product-detail-price"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }}</div>
 
 							<div class="mb30">
                 @if($total_stock == 0)
@@ -106,7 +106,7 @@
 								<div class="product-img"> <img src="{{ asset(explode("::",$releated_product->image_path)[0]) }}" class="img-responsive"/> </div>
 								<div class="h50">
 									<div class="product-name text-center"> {{ $releated_product->product_name }} </div>
-									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($releated_product->sale != 0 ? $releated_product->product_price - ($releated_product->product_price * $releated_product->sale / 100) : $releated_product->product_price)) }} </div>
+									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ number_format(($releated_product->sale_price != 0 ? $releated_product->sale_price : $releated_product->product_price)) }} </div>
 								</div>
 							</a>
 						</div>

@@ -86,7 +86,11 @@
               @php $price = 0; @endphp
               @php $subtotal=0; @endphp
 							@foreach($details as $detail)
-								  @php $price = $detail->price - ($detail->price * $detail->sale / 100); @endphp
+								@if($detail->sale)
+									@php $price = $detail->price - ($detail->price * $detail->sale / 100); @endphp
+								@else
+									@php $price = $detail->price - $detail->discount_amount; @endphp
+								@endif
 							<div class="list items hidden-xs">
 								<div class="w100">
 									<img src="{{ asset(explode("::",$detail->image_path)[0]) }}" class="img-responsive" />

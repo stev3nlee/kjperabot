@@ -48,7 +48,7 @@ $(function() {
 													<p>{{ $order->billing_phone }}</p>
 													<p>{{ $order->billing_address }}</p>
 													<p>{{ $order->billing_province->province_name }}</p>
-													<p>{{ $order->billing_city->city_name }}, {{ $order->billing_district->district_name }}</p>
+													<p>{{ $order->shipping_jne_city_label }}</p>
 													<p>Indonesia</p>
 													<p>{{ $order->billing_post_code }}</p>
 												</div>
@@ -59,7 +59,7 @@ $(function() {
 													<p>{{ $order->shipping_phone }}</p>
 													<p>{{ $order->shipping_address }}</p>
 													<p>{{ $order->shipping_province->province_name }}</p>
-													<p>{{ $order->shipping_city->city_name }}, {{ $order->shipping_district->district_name }}</p>
+													<p>{{ $order->shipping_jne_city_label }}</p>
 													<p>Indonesia</p>
 													<p>{{ $order->shipping_post_code }}</p>
 												</div>
@@ -72,7 +72,7 @@ $(function() {
 												</div>
 												<div class="wdth50">
 													<p class="htitle">Delivery</p>
-													<p>@if($order->jne_shipping_method == 1) Reg @else  OKE ("Ongkos Kirim Ekonomis") @endif</p>
+													<p>@if($order->jne_shipping_method == 'REG') Reg @else  OKE ("Ongkos Kirim Ekonomis") @endif</p>
 												</div>
 											</div>
 											<div class="border-title"></div>
@@ -93,13 +93,17 @@ $(function() {
 													<tbody>
 														@php $subtotal=0; @endphp
 														@foreach($order_details as $detail)
-															@php $price = $detail->price - ($detail->sale * $detail->price / 100) @endphp
+															@if($detail->sale)
+																@php $price = $detail->price - ($detail->price * $detail->sale / 100); @endphp
+															@else
+																@php $price = $detail->price - $detail->discount_amount; @endphp
+															@endif
 														<tr>
 															<td>
 																<div class="clearfix">
 																	<div class="pull-left mr20">
 																		<div>
-																			<img src="{{ asset($detail->product_detail->product->image_path) }}" class="img-responsive" style="width: 80px;">
+																			<img src="{{ asset(explode("::",$detail->image_path)[0]) }}" class="img-responsive" style="width: 80px;">
 																		</div>
 																	</div>
 																	<div class="pull-left">
@@ -114,7 +118,7 @@ $(function() {
 															<td class="text-center">{{ $detail->quantity }}</td>
 															<td class="text-right">Rp. {{number_format($price * $detail->quantity) }}</td>
 														</tr>
-														@php $subtotal +=$price @endphp
+														@php $subtotal += $detail->quantity * $price; @endphp
 														@endforeach
 													</tbody>
 													<tfoot>

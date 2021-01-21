@@ -51,11 +51,11 @@
 										</div>
 									</div>
 									<div class="display-inline">
-										<input type="text" class="form-control" id="price" maxlength="9" name="price"  onkeyup="calculate()" value="{{ $product->product_price }}" style="width:150px;" />
+										<input type="text" class="form-control" id="price" maxlength="9" name="price"  value="{{ $product->product_price }}" style="width:150px;" />
 									</div>
 								</div>
 							</div>
-							<div class="display-inline mr10">
+							<!-- <div class="display-inline mr10">
 								<label>Sale</label>
 								<div class="clearfix">
 									<div class="display-inline mr10" style="width: 50px;">
@@ -69,7 +69,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div class="display-inline">
 								<label>Final Price</label>
 								<div class="clearfix">
@@ -81,11 +81,11 @@
 										</div>
 									</div>
 									<div class="display-inline">
-										<input type="text" class="form-control" maxlength="9" id="total_price" name="totalPrice" disabled  value="{{$product->product_price-($product->product_price*$product->sale/100)}}" style="width:150px;" />
+										<input type="text" class="form-control" maxlength="9" id="total_price" name="sale_price"  value="{{$product->sale_price}}" style="width:150px;" />
 									</div>
 								</div>
 							</div>
-							<br />
+							<br /><br>
 							<div class="clearfix mb30">
 								<div class="display-inline mr10">
 									<label>Weight</label>

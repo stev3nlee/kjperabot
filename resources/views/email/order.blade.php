@@ -149,7 +149,7 @@
                                 @php $price = 0; @endphp
                                 @php $subtotal=0; @endphp
 																@foreach($details as $detail)
-																@php $price = $detail->price - ($detail->price * $detail->sale / 100); @endphp
+																@php $price = $detail->price - $detail->discount_amount; @endphp
 																	<tr>
 																		<td style="padding: 0;">
 																			<table border="0" cellpadding="10" cellspacing="0" width="100%" style="border-bottom: 1px solid #c6c6c6; padding: 15px 0;">

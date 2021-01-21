@@ -179,7 +179,11 @@
 													<tbody>
 														@php $subtotal=0; @endphp
 														@foreach($order->order_details as $detail)
+														@if($detail->sale)
 															@php $price = $detail->price - ($detail->price * $detail->sale / 100); @endphp
+														@else
+															@php $price = $detail->price - $detail->discount_amount; @endphp
+														@endif
 														<tr>
 															<td>
 																<div class="clearfix">

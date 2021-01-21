@@ -24,7 +24,7 @@
 								<td><img src="{{ asset(explode("::",$wishlist->image_path)[0]) }}" class="img-responsive"></td>
 								<td>
 									<div class="wish-header">{{$wishlist->product_name}}</div>
-									<div class="wish-desc">Rp {{ number_format($wishlist->sale == 0 ? $wishlist->product_price : $wishlist->product_price - ($wishlist->product_price * $wishlist->sale / 100)) }}</div>
+									<div class="wish-desc">Rp {{ number_format($wishlist->sale_price == 0 ? $wishlist->product_price : $wishlist->sale_price) }}</div>
 								</td>
 								<td>
 									<div class="wish-header">Stok</div>

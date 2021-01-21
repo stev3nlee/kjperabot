@@ -35,7 +35,7 @@
 										<td>{{ $product_detail->color }}</div></td>
 										<td>{{ $product_detail->stock }}</td>
 										<td>IDR {{ number_format($product->product_price) }}</td>
-										<td>IDR {{ number_format($product->product_price-($product->product_price*$product->sale/100)) }}</td>
+										<td>IDR @if($product->sale_price){{ number_format($product->sale_price) }}@else 0 @endif</td>
 									</tr>
 								@endforeach
 								</tbody>

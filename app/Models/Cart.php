@@ -15,7 +15,7 @@ class Cart extends Model
     $query->select('carts.id AS cart_id','carts.qty',"product_details.color",'products.*',\DB::raw('SUM(stock) AS total_stock'),'product_details.id AS product_detail_id');
     $query->join('product_details','product_details.id','carts.product_detail_id');
     $query->join('products','products.id','product_details.product_id');
-    $query->groupby('cart_id','carts.qty',"product_details.color",'products.id','products.slug','products.product_name','products.product_code','products.subcategory_id','products.sale','products.weight','products.product_price','products.product_description','products.image_path','products.created_at','products.updated_at','product_details.id');
+    $query->groupby('cart_id','carts.qty',"product_details.color",'products.id','products.slug','products.product_name','products.product_code','products.subcategory_id','products.sale','products.sale_price','products.discount_amount','products.weight','products.product_price','products.product_description','products.image_path','products.created_at','products.updated_at','product_details.id');
     return $query;
   }
 

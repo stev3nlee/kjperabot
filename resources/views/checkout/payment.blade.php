@@ -36,7 +36,7 @@
 								<div class="checkout-header mt30">Biaya Pengiriman</div>
 								@php $subtotal=0; @endphp
 	              @foreach($carts as $cart)
-	                @php $price = $cart->product_price - ($cart->product_price * $cart->sale / 100); @endphp
+	                @php $price = ($cart->sale_price == 0 ? $cart->product_price : $cart->sale_price); @endphp
 								@endforeach
 								@if($subtotal > $dataOrder['free_shipping'] and $dataOrder['free_shipping']>0)
 									<div class="checkout-desc">Rp. {{ number_format($dataOrder['shipping_cost']) }}</div>
@@ -85,7 +85,7 @@
               @php $price = 0; @endphp
               @php $subtotal=0; @endphp
               @foreach($carts as $cart)
-                @php $price = $cart->product_price - ($cart->product_price * $cart->sale / 100); @endphp
+                @php $price = ($cart->sale_price == 0 ? $cart->product_price : $cart->sale_price); @endphp
 							<div class="list items hidden-xs">
 								<div class="w100">
 									<img src="{{ asset(explode("::",$cart->image_path)[0]) }}" class="img-responsive" />

@@ -25,7 +25,11 @@ div.dataTables_wrapper div.dataTables_paginate, .dataTables_filter, .adminTable 
 						@php $total =0; $grandtotal=0; @endphp
 						@foreach($totalPerday as $order)
 							@foreach($order->order_details as $detail)
+								@if($detail->sale)
 								@php $total = $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+								@else
+								@php $total = ($detail->price - $detail->discount_amount) * $detail->quantity; @endphp
+								@endif
 								@php $total = $total +($total * $order->tax_vat / 100); @endphp
 								@php $total = $total + $order->jne_shipping_value - ($order->free_shipping > 0 ? ($order->free_shipping >= $order->jne_shipping_value ? $order->jne_shipping_value : $order->free_shipping) : 0); @endphp
 								@php $grandtotal +=$total; @endphp
@@ -38,7 +42,11 @@ div.dataTables_wrapper div.dataTables_paginate, .dataTables_filter, .adminTable 
 						@php $total =0; $grandtotal=0; @endphp
 						@foreach($totalPermonth as $order)
 							@foreach($order->order_details as $detail)
-								@php $total = $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+								@if($detail->sale)
+									@php $total = $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+								@else
+									@php $total = ($detail->price - $detail->discount_amount) * $detail->quantity; @endphp
+								@endif
 								@php $total = $total +($total * $order->tax_vat / 100); @endphp
 								@php $total = $total + $order->jne_shipping_value - ($order->free_shipping > 0 ? ($order->free_shipping >= $order->jne_shipping_value ? $order->jne_shipping_value : $order->free_shipping) : 0); @endphp
 								@php $grandtotal +=$total; @endphp
@@ -51,7 +59,11 @@ div.dataTables_wrapper div.dataTables_paginate, .dataTables_filter, .adminTable 
 						@php $total =0; $grandtotal =0; @endphp
 						@foreach($totalPeryear as $order)
 							@foreach($order->order_details as $detail)
-								@php $total = $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+								@if($detail->sale)
+									@php $total = $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+								@else
+									@php $total = ($detail->price - $detail->discount_amount) * $detail->quantity; @endphp
+								@endif
 								@php $total = $total +($total * $order->tax_vat / 100); @endphp
 								@php $total = $total + $order->jne_shipping_value - ($order->free_shipping > 0 ? ($order->free_shipping >= $order->jne_shipping_value ? $order->jne_shipping_value : $order->free_shipping) : 0); @endphp
 								@php $grandtotal +=$total; @endphp
@@ -133,11 +145,16 @@ div.dataTables_wrapper div.dataTables_paginate, .dataTables_filter, .adminTable 
 								<tr>
 								@php $total =0; $grandtotal =0; @endphp
 								@foreach($order->order_details as $detail)
-									@php $total = $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+									@if($detail->sale)
+										@php $total = $detail->price - ($detail->price * $detail->sale / 100) * $detail->quantity; @endphp
+									@else
+										@php $total = ($detail->price - $detail->discount_amount) * $detail->quantity; @endphp
+									@endif
 									@php $total = $total +($total * $order->tax_vat / 100); @endphp
-									@php $total = $total + $order->jne_shipping_value - ($order->free_shipping > 0 ? ($order->free_shipping >= $order->jne_shipping_value ? $order->jne_shipping_value : $order->free_shipping) : 0); @endphp
+									
 									@php $grandtotal +=$total; @endphp
 								@endforeach
+								@php $grandtotal = $grandtotal + $order->jne_shipping_value - ($order->free_shipping > 0 ? ($order->free_shipping >= $order->jne_shipping_value ? $order->jne_shipping_value : $order->free_shipping) : 0); @endphp
 							<td> {{ $order->order_no }} </td>
 							<td> {{ $order->billing_first_name }} {{ $order->billing_last_name }}</td>
 							<td> IDR {{ number_format($grandtotal) }} </td>

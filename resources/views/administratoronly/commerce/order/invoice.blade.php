@@ -102,7 +102,12 @@
 					</div>
 					@php $subtotal=0; @endphp
 					@foreach($order->order_details as $detail)
-						@php $price = $detail->price - ($detail->price * $detail->sale / 100); @endphp
+						@if($detail->sale)
+							@php $price = $detail->price - ($detail->price * $detail->sale / 100); @endphp
+						@else
+							@php $price = $detail->price - $detail->discount_amount; @endphp
+						@endif
+
 					<div class="clearfix" style="border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;">
 						<div style="float: left; width: 50%; color: #2b2b2b; font-size: 14px; padding: 12px 15px;">{{ $detail->product_detail->product->product_name }}, Warna : {{ $detail->product_detail->color }}</div>
 						<div style="float: left; width: 20%; color: #2b2b2b; font-size: 14px; border-left: 1px solid #999999; padding: 12px 15px;">RP {{ number_format($price) }}</div>

@@ -236,7 +236,7 @@
 						<div id="order-item" class="data-table detail-order">
               @php $subtotal = 0; @endphp
               @foreach($carts as $cart)
-                @php $price = ($cart->sale == 0 ? $cart->product_price : $cart->product_price - ($cart->product_price * $cart->sale / 100)); @endphp
+                @php $price = ($cart->sale_price == 0 ? $cart->product_price : $cart->sale_price); @endphp
 							<div class="list items">
 								<div class="w100">
 									<img src="{{ asset(explode("::",$cart->image_path)[0]) }}" class="img-responsive" />
