@@ -253,6 +253,7 @@ textarea.form-control { height: 120px; resize: none; line-height: 1.8; border: 1
 .product-img img { border:1px solid #eee; padding:5px; }
 .product-name { text-align:center; margin: 10px 0 5px 0; font-size: 13px; height:40px; overflow:hidden; }
 .product-price { font-size: 13px; color: #30318b; margin-bottom:60px; }
+.product-price-sale { font-size: 13px; color: #30318b; margin-bottom:10px; }
 .product-price-code { font-size: 10px; color: #30318b;font-weight:600 !important; }
 .more-product a { margin-top:50px; font-size: 14px; border-bottom:1px solid #777; display:inline-block; }
 .more-product a:hover { border-bottom:0px; opacity:0.7; border-bottom:1px solid #f7f7f7; }
@@ -527,7 +528,17 @@ ul li a.toggle { display: block; }
 .border-menu:last-child { border-bottom:1px solid #444; margin:20px 0; }
 
 .close-menu img { cursor: pointer;  }
-.form-search.form-canvas { color:#fff; width: 100%; text-align:left;  border: 1px solid #444; margin:20px 0; padding:10px; height:40px; -moz-border-radius: 3px !important; -webkit-border-radius: 3px !important; -khtml-border-radius: 3px !important; border-radius: 3px !important;  }
+.form-search.form-canvas { color:#000; width: 100%; text-align:left;  border: 1px solid #444; margin:20px 0; padding:10px; height:40px; -moz-border-radius: 3px !important; -webkit-border-radius: 3px !important; -khtml-border-radius: 3px !important; border-radius: 3px !important;  }
+.form-canvas { color:#000 !important; }
+
+.fix-wa { position: fixed; right: 20px; bottom: 15px; z-index: 100; border-radius:30px;  }
+.fix-wa img { border-radius:30px; width:105px;}
+
+.click-search { cursor: pointer; position: relative; top: 0px; margin-right: 0px; }
+.click-search img { width: 20px; }
+.search-inline { display: inline-block; }
+.input-search { -webkit-transition:  0.5s; transition: 0.5s; width: 0; border: 0; border-bottom: 1px solid #bdbdbd; -moz-border-radius: 0; -webkit-border-radius: 0; -khtml-border-radius: 0; border-radius: 0; padding: 0; height: 25px; }
+.open-search { width: 100%; padding: 2px 10px; display:none;}
 
 @media (max-width: 992px) {
   body.offcanvas-menu-open { min-height: 100%; position: relative; }
