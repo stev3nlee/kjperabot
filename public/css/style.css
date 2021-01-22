@@ -282,6 +282,8 @@ textarea.form-control { height: 120px; resize: none; line-height: 1.8; border: 1
 /* Product */
 .product-detail-name { font-size: 24px; color:#222; }
 .product-detail-price { font-size: 18px; color: #30318b; margin:20px 0px;font-weight:600 !important;  }
+.product-detail-original-price { font-size: 18px; color: #30318b; margin:20px 0px 7px 0px;font-weight:600 !important; text-decoration: line-through;  }
+.product-detail-sale-price { font-size: 18px; color: red; margin:0 0px 20px 0;font-weight:600 !important;  }
 .product-stock { margin-bottom: 35px; font-size: 12px; line-height:20px; }
 .product-color { font-size: 12px; font-weight:600 !important;  color: #30318b; margin-bottom:15px;  }
 .filter-box { margin:50px 0; font-size: 14px; line-height:20px; }
