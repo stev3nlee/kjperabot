@@ -32,7 +32,12 @@
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="">
 							<div class="product-detail-name"> {{ $product->product_name }} </div>
-							<div class="product-detail-price"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }}</div>
+							@if($product->sale_price)
+								<div class="product-detail-original-price"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
+								<div class="product-detail-sale-price"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
+							@else
+								<div class="product-detail-price"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }}</div>
+							@endif
 
 							<div class="mb30">
                 @if($total_stock == 0)

@@ -38,7 +38,12 @@
 								<a href="{{ url('/product-detail/'.$product->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
 									<div class="product-name text-center"> {{ $product->product_name }} </div>
-									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ ($product->sale_price != 0 ? $product->sale_price : $product->product_price) }} </div>
+									@if($product->sale_price)
+										<div class="product-original-price text-center"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
+										<div class="product-price-sale text-center"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
+									@else
+										<div class="product-price text-center"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
+									@endif
 								</a>
 							</div>
 						</div>
@@ -54,7 +59,12 @@
 								<a href="{{ url('/product-detail/'.$product->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
 									<div class="product-name text-center"> {{ $product->product_name }} </div>
-									<div class="product-price text-center"> <span class="product-price-code">RP</span> {{ ($product->sale_price != 0 ? $product->sale_price : $product->product_price) }} </div>
+									@if($product->sale_price)
+										<div class="product-original-price text-center"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
+										<div class="product-price-sale text-center"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
+									@else
+										<div class="product-price text-center"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
+									@endif
 								</a>
 							</div>
 						</div>
