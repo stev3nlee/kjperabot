@@ -38,6 +38,9 @@
 				</div>
 				@endforeach
 			</div>
+			<div class="more-product">
+				<a href="{{ url('/product?urut=promo&order=40') }}"> More &rarr; </a>
+			</div>
 		</div>
 	</div>
 	@endif
@@ -181,6 +184,9 @@
 							</div>
 						</div>
 						@endforeach
+					</div>
+					<div class="more-product">
+						<a href="{{ url('/product?urut=promo&order=40') }}"> More &rarr; </a>
 					</div>
 				</div>
 			</div>

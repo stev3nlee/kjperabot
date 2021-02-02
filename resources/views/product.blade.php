@@ -14,7 +14,7 @@
 				Urutkan :
 				    <a href="{{ url()->current() }}?{{($search != null) ? "q=".$search."&" : ""}}urut=terbaru&order={{$limit}}" class="@if($order == "terbaru") active @endif"> Terbaru </a>
 					<a href="{{ url()->current() }}?{{($search != null) ? "q=".$search."&" : ""}}urut=termurah&order={{$limit}}" class="@if($order == "termurah") active @endif mr5"> Termurah </a>
-					<a href="{{ url()->current() }}?{{($search != null) ? "q=".$search."&" : ""}}urut=termahal&order={{$limit}}" class="@if($order == "termahal") active @endif" > Termahal </a>
+					<a href="{{ url()->current() }}?{{($search != null) ? "q=".$search."&" : ""}}urut=termahal&order={{$limit}}" class="@if($order == "termahal") active @endif mr5"> Termahal </a>
 					<a href="{{ url()->current() }}?{{($search != null) ? "q=".$search."&" : ""}}urut=promo&order={{$limit}}" class="@if($order == "promo") active @endif" > Promo </a>&nbsp;
 					
 				<!--
