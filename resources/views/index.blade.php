@@ -157,6 +157,9 @@
 						</div>
 						@endforeach
 					</div>
+					<div class="more-product">
+						<a href="{{ url('/product?urut=terbaru&order=40') }}"> More &rarr; </a>
+					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="promo" role="tabpanel" aria-labelledby="promo-tab">
@@ -167,12 +170,12 @@
 							<div class="product-box">
 								<a href="{{ url('/product-detail/'.$product->slug) }}">
 									<div class="product-img"> <img src="{{ asset(explode("::",$product->image_path)[0]) }}" class="img-responsive"/> </div>
-									<div class="product-name text-center"> {{ $product->product_name }} </div>
+									<div class="product-name"> {{ $product->product_name }} </div>
 									@if($product->sale_price)
-										<div class="product-original-price text-center"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
-										<div class="product-price-sale text-center"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
+										<div class="product-original-price"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
+										<div class="product-price-sale"> <span class="product-price-code">RP</span> {{ number_format(($product->sale_price != 0 ? $product->sale_price : $product->product_price)) }} </div>
 									@else
-										<div class="product-price text-center"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
+										<div class="product-price"> <span class="product-price-code">RP</span> {{  number_format($product->product_price) }} </div>
 									@endif
 								</a>
 							</div>
