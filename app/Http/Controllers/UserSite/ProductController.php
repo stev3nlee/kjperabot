@@ -50,6 +50,8 @@ class ProductController extends Controller
         $order = 'termahal';
       }else if($request->input('urut') == 'termurah'){
         $order = 'termurah';
+      }else if($request->input('urut') == 'promo'){
+        $order = 'promo';
       }else{
         $order = 'terbaru';
       }
@@ -74,7 +76,12 @@ class ProductController extends Controller
     }
 
     $data = [];
-    $products = $products->getOrder($orderby)->get();
+    if($request->input('urut') == 'promo'){
+      $products = $products->where('sale_price','!=',0)->get();
+    }else{
+      $products = $products->getOrder($orderby)->get();
+    }
+    
     foreach($products as $product){
       if($product->totalstock > 0){
         $data[] = $product;
