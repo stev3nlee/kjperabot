@@ -7,7 +7,7 @@
 			<div class="title"> Latest Article </div>
 			<div class="main-art">
 				<div class="">
-					<img src="{{ asset('images/uploads/article.jpg') }}" class="img-responsive" />
+					<img src="{{ asset($article->image_path) }}" class="img-responsive" />
 				</div>
 				<div class="row mt20">
 					<div class="col-md-3 col-sm-3 col-xs-12">
